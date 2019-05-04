@@ -1,0 +1,23 @@
+<img class="img-thumbnail" src="http://placehold.it/1200x400" alt="Banner Image">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 col-12">
+  <a class="navbar-brand" href="#">UserName</a>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['videos']">Videos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['lists']">Lists</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="col-12">
+  <router-outlet></router-outlet>
+</div>
