@@ -24,7 +24,7 @@ const routes: Routes = [
             { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
             { path: 'channel/:id', loadChildren: './channel/channel.module#ChannelModule'}, // <--- Muestra la cuenta con el id seleccionado
             { path: 'account', loadChildren: ''}, // <--- Muestra la cuenta del usuario
-            { path: 'video/:id', loadChildren: ''}, // <--- Muestra el video seleccionado
+            { path: 'video/:id', loadChildren: './video/video.module#VideoModule'}, // <--- Muestra el video seleccionado
             { path: 'list/:id', loadChildren: '' }, // <-- Muestra la lista de videos seleccionada
             { path: 'upload', loadChildren: '', canActivate: [AuthGuard]}, // <-- Pagina para subir videos nuevos
             { path: 'settings', loadChildren: '', canActivate: [AuthGuard]}, // <-- Pagina para modificar los ajustes del usuario

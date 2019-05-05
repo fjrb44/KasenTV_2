@@ -1,0 +1,12 @@
+img{
+    border-radius: 100px;
+}
+
+.votes{
+    margin: 0 1px;
+    padding: 0 4px;
+
+    &:hover{
+        color: orange;
+    }
+}

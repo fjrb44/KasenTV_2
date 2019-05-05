@@ -1,8 +1,8 @@
 <div class="row" *ngIf="videos">
-  <div class="col-12 col-md-4 col-lg-3 mt-3 video" *ngFor="let video of videos">
+  <div class="{{col}} video" *ngFor="let video of videos" routerLink="/video/{{video.id}}">
     <div>
       <img class="img-thumbnail" src="http://placehold.it/500x250" alt="Logo Image">
     </div>
-    <p>{{ video }}</p>
+    <p>{{ video.name }}</p>
   </div>
 </div>

@@ -7,7 +7,6 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
-// import { VideosComponent } from './../shared/modules/videos/videos.component';
 
 @NgModule({
     imports: [
@@ -19,8 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
     declarations: [
         LayoutComponent, 
         SidebarComponent, 
-        HeaderComponent,
-        // VideosComponent
+        HeaderComponent, 
     ]
 })
 export class LayoutModule {}

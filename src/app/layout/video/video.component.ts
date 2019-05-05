@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Video } from 'src/app/shared/models/video';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-video',
+  templateUrl: './video.component.html',
+  styleUrls: ['./video.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class VideoComponent implements OnInit {
   videos: Video[];
-
+  col: string;
   constructor() { }
 
   ngOnInit() {
+    this.col = "col-12 mt-3";
     this.videos = [
       {
         "id":1,
@@ -25,18 +26,6 @@ export class HomeComponent implements OnInit {
       }, {
         "id":4,
         "name":"Video Test 4"
-      }, {
-        "id":5,
-        "name":"Video Test 5"
-      }, {
-        "id":6,
-        "name":"Video Test 6"
-      }, {
-        "id":7,
-        "name":"Video Test 7"
-      }, {
-        "id":8,
-        "name":"Video Test 8"
       }
     ];
   }

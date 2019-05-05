@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Video } from 'src/app/shared/models/video';
 
 @Component({
   selector: 'app-channel-videos',
@@ -6,12 +7,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos.component.scss']
 })
 export class ChannelVideosComponent implements OnInit {
-  videos: string[];
+  videos: Video[];
 
   constructor() { }
 
   ngOnInit() {
-    this.videos = ["Username 1 Video Player", "Username 2 Video Player", "Username 3 Video Player","Username 4 Video Player", "Username 5 Video Player"]
+    this.videos = [
+      {
+        "id": 11,
+        "name": "Username Video 1",
+      }, {
+        "id": 12,
+        "name": "Username Video 2"
+      }, {
+        "id": 13,
+        "name": "Username Video 3"
+      }, {
+        "id": 14,
+        "name": "Username Video 4"
+      }, {
+        "id": 15,
+        "name": "Username Video 5"
+      }, {
+        "id": 16,
+        "name": "Username Video 6"
+      }, {
+        "id": 17,
+        "name": "Username Video 7"
+      }, {
+        "id": 18,
+        "name": "Username Video 8"
+      }
+    ];
   }
 
 }
