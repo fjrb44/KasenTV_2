@@ -8,30 +8,12 @@ import { routerTransition } from '../../router.animations';
   animations: [routerTransition()]
 })
 export class TendenciesComponent implements OnInit {
+  videos: string[];
 
   constructor() { }
 
   ngOnInit() {
+    this.videos = ["Video Test 1", "Video Test 2", "Video Test 3", "Video Test 4", "Video Test 5", "Video Test 6", "Video Test 7", "Video Test 8"];
   }
 
 }
-
-/*
-
-import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../router.animations';
-
-@Component({
-    selector: 'app-tables',
-    templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.scss'],
-    animations: [routerTransition()]
-})
-export class TablesComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit() {}
-}
-
-
-*/

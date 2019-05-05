@@ -29,10 +29,6 @@
             <i class="fa fa-fw fa-desktop"></i>&nbsp;
             <span>{{ 'Bootstrap Element' | translate }}</span>
         </a>
-        <a [routerLink]="['/grid']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-wrench"></i>&nbsp;
-            <span>{{ 'Bootstrap Grid' | translate }}</span>
-        </a>
         <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;
             <span>{{ 'Component' | translate }}</span>
@@ -64,20 +60,36 @@
             <i class="fa fa-file-o"></i>&nbsp;
             <span>{{ 'Blank Page' | translate }}</span>
         </a>
-        <!--
-        <a href="http://www.strapui.com/" class="list-group-item">
-            <i class="fa fa-caret-down"></i>&nbsp;
-            <span>{{ 'More Themes' | translate }}</span>
-        </a>
-        -->
+
         <!-- Menu superior version movil -->
         <div class="header-fields">
             <div class="separator"></div>
-            <!--
-            <a (click)="rltAndLtr()" class="list-group-item">
-                <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>
-            </a>
-            -->
+            
+            <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('profile')">
+                    <span><i class="fa fa-user"></i>&nbsp; John Smith</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'profile'">
+                    <ul class="submenu">
+                        <li>
+                            <a [routerLink]="['/account']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                <span><i class="fa fa-fw fa-user"></i> {{ 'My channel' | translate }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/account']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                                <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/login']" (click)="onLoggedout()">
+                                <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
             <div class="nested-menu">
                 <a class="list-group-item" (click)="addExpandClass('languages')">
                     <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
@@ -94,13 +106,6 @@
                                 {{ 'French' | translate }}
                             </a>
                         </li>
-                        <!--
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('ur')">
-                                {{ 'Urdu' | translate }}
-                            </a>
-                        </li>
-                        -->
                         <li>
                             <a href="javascript:void(0)" (click)="changeLang('es')">
                                 {{ 'Spanish' | translate }}
@@ -111,48 +116,9 @@
                                 {{ 'Italian' | translate }}
                             </a>
                         </li>
-                        <!--
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('fa')">
-                                {{ 'Farsi' | translate }}
-                            </a>
-                        </li>
-                        -->
                         <li>
                             <a href="javascript:void(0)" (click)="changeLang('de')">
                                 {{ 'German' | translate }}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            
-            <div class="nested-menu">
-                <a class="list-group-item" (click)="addExpandClass('profile')">
-                    <span><i class="fa fa-user"></i>&nbsp; John Smith</span>
-                </a>
-                <li class="nested" [class.expand]="showMenu === 'profile'">
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['/account']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                                <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</span>
-                            </a>
-                        </li>
-                        <!--
-                        <li>
-                            <a href="javascript:void(0)">
-                                <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}</span>
-                            </a>
-                        </li>
-                        -->
-                        <li>
-                            <a href="javascript:void(0)">
-                                <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/login']" (click)="onLoggedout()">
-                                <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
                             </a>
                         </li>
                     </ul>

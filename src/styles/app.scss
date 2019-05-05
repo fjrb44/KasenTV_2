@@ -5,8 +5,17 @@
 @import "rtl";
 @import "responsive";
 
+@font-face{
+    font-family: "custom-font";
+    src: url("../assets/font/Typori-Regular.ttf") format("opentype");
+}
+
 @media print {
     .breadcrumb {
         display: none !important;
     }
+}
+
+*{
+    font-family: "custom-font";
 }

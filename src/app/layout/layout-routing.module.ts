@@ -18,16 +18,17 @@ const routes: Routes = [
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
-            { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'tendencies', loadChildren: './tendencies/tendencies.module#TendenciesModule'}, // <--- Muestra la pagina con las tendencias
-            { path: 'account', redirectTo: 'account/'+x, pathMatch: 'prefix', canActivate: [AuthGuard]}, // <-- Redireccion a account con el id del usuario
-            { path: 'account/:id', loadChildren: './account/account.module#AccountModule'}, // <--- Muestra la cuenta con el id seleccionado
+            { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
+            { path: 'channel/:id', loadChildren: './channel/channel.module#ChannelModule'}, // <--- Muestra la cuenta con el id seleccionado
+            { path: 'account', loadChildren: ''}, // <--- Muestra la cuenta del usuario
             { path: 'video/:id', loadChildren: ''}, // <--- Muestra el video seleccionado
             { path: 'list/:id', loadChildren: '' }, // <-- Muestra la lista de videos seleccionada
             { path: 'upload', loadChildren: '', canActivate: [AuthGuard]}, // <-- Pagina para subir videos nuevos
-            { path: 'settings', loadChildren: '', canActivate: [AuthGuard]} // <-- Pagina para modificar los ajustes del usuario
+            { path: 'settings', loadChildren: '', canActivate: [AuthGuard]}, // <-- Pagina para modificar los ajustes del usuario
+            { path: 'search', loadChildren: ''} // <--- Pagina para mostrar las busquedas
         ]
     }
 ];

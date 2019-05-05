@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-videos',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos.component.scss']
 })
 export class VideosComponent implements OnInit {
+  @Input("videos") public videos: string[];
 
   constructor() { }
 

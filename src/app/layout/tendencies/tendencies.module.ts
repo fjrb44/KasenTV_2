@@ -4,26 +4,10 @@ import { CommonModule } from '@angular/common';
 import { TendenciesComponent } from './tendencies.component';
 import { PageHeaderModule } from './../../shared';
 import { TendenciesRoutingModule } from './tendencies-routing.module';
+import { VideosModule } from 'src/app/shared/modules/videos/videos.module';
 
 @NgModule({
-    imports: [CommonModule, TendenciesRoutingModule, PageHeaderModule],
+    imports: [CommonModule, TendenciesRoutingModule, PageHeaderModule, VideosModule],
     declarations: [TendenciesComponent]
 })
 export class TendenciesModule {}
-
-/*
-
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { TablesRoutingModule } from './tables-routing.module';
-import { TablesComponent } from './tables.component';
-import { PageHeaderModule } from './../../shared';
-
-@NgModule({
-    imports: [CommonModule, TablesRoutingModule, PageHeaderModule],
-    declarations: [TablesComponent]
-})
-export class TablesModule {}
-
-*/

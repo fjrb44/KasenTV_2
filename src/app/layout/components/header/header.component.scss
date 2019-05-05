@@ -1,9 +1,17 @@
-$topnav-background-color: #222;
+$topnav-background-color: rgb(107, 204, 112);
+$topnav-text-color: rgb(0, 0, 0);
+$topnav-text-color-hover: rgb(43, 43, 43);
+$navbar-brand: orange;
+
 :host {
     .navbar {
         background-color: $topnav-background-color;
         .navbar-brand {
-            color: #fff;
+            color: $navbar-brand;
+            font-weight: bold;
+            border-radius: 100px;
+            padding: 0 10px;
+            background-color: greenyellow;
         }
         
         .mobile{
@@ -19,15 +27,15 @@ $topnav-background-color: #222;
         }
 
         .nav-item > a {
-            color: #999;
+            color: $topnav-text-color;
             &:hover {
-                color: #fff;
+                color: $topnav-text-color-hover;
             }
         }
 
         @media (min-width: 992px){
             form > input{
-                margin-left: 120px;
+                margin-left: 100px;
             }
         }
 
