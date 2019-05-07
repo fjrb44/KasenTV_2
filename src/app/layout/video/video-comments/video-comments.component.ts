@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Comment } from 'src/app/shared/models/comment';
 
 @Component({
   selector: 'app-video-comments',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video-comments.component.scss']
 })
 export class VideoCommentsComponent implements OnInit {
-  comments: {user: string, comment: string, upvotes: number, downvotes: number}[];
+  comments: Comment[];
+
 
   constructor() { }
 
@@ -20,4 +22,11 @@ export class VideoCommentsComponent implements OnInit {
     ];
   }
 
+  upvote(comment: Comment){
+    comment.upvotes += 1;
+  }
+
+  downvote(comment: Comment){
+    comment.upvotes -= 1;
+  }
 }

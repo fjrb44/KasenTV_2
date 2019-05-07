@@ -1,13 +1,13 @@
-<div class="row mt-5" *ngFor="let comment of comments">
+<div class="row mt-2 comment" *ngFor="let comment of comments">
   <div class="col-3 col-lg-2 offset-lg-1">
-    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="Logo Image">
+    <img class="img-thumbnail" src="http://placehold.it/100x100" alt="Logo Image">
   </div>
   <div class="col-9 col-lg-9">
     <h4>{{comment.user}}</h4>
     <p>{{comment.comment}}</p>
     <p>
-      <i class="fa fa-thumbs-o-up votes"></i>{{comment.upvotes}}
-      <i class="fa fa-thumbs-o-down votes"></i>
+      <i class="fa fa-thumbs-o-up votes" (click)="upvote(comment)"></i>{{comment.upvotes}}
+      <i class="fa fa-thumbs-o-down votes" (click)="downvote(comment)"></i>
     </p>
     
   </div>

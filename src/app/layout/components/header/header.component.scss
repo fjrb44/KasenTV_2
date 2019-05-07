@@ -19,6 +19,8 @@ $navbar-brand: orange;
         }
 
         .nav-item{
+            cursor: pointer;
+            
             .dropdown-menu-right{
                 a {
                     padding-left: 10px;
@@ -30,6 +32,18 @@ $navbar-brand: orange;
             color: $topnav-text-color;
             &:hover {
                 color: $topnav-text-color-hover;
+            }
+        }
+        
+        .navbar-toggler{
+            outline: none;
+        }
+
+        .upload{
+            outline: none;
+            
+            &:hover{
+                color: orange;
             }
         }
 
