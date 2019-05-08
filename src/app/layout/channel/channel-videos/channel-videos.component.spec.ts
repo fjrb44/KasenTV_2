@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChannelVideosComponent } from './videos.component';
+import { ChannelVideosComponent } from './channel-videos.component';
 
 describe('ChannelVideosComponent', () => {
   let component: ChannelVideosComponent;

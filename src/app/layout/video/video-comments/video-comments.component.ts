@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from 'src/app/shared/models/comment';
+import { CommentService } from 'src/app/shared/services/commentService';
 
 @Component({
   selector: 'app-video-comments',
@@ -7,19 +8,15 @@ import { Comment } from 'src/app/shared/models/comment';
   styleUrls: ['./video-comments.component.scss']
 })
 export class VideoCommentsComponent implements OnInit {
+  @Input("videoId") videoId: number;
   comments: Comment[];
 
 
-  constructor() { }
+  constructor( private commentService: CommentService ) { }
 
   ngOnInit() {
-    this.comments = [
-      {"user":"User 1","comment":"Test comment","upvotes":10,"downvotes":0},
-      {"user":"User 2","comment":"Test comment","upvotes":0,"downvotes":0},
-      {"user":"User 3","comment":"Test comment","upvotes":0,"downvotes":0},
-      {"user":"User 4","comment":"Test comment","upvotes":0,"downvotes":0},
-      {"user":"User 5","comment":"Test comment","upvotes":0,"downvotes":0}
-    ];
+
+    this.comments = this.commentService.getCommentsFromVideo(this.videoId);
   }
 
   upvote(comment: Comment){

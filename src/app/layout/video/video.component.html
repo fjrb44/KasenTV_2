@@ -1,11 +1,17 @@
 <div class="row">
-  <div class="col-12 col-md-9">
-      <app-video-player [video]="video"></app-video-player>
-      <app-video-form-comment></app-video-form-comment>
-      <app-video-comments></app-video-comments>
+  <div class="col-12">
+    <app-video-player [video]="video"></app-video-player>
   </div>
-  <div class="col-12 col-md-3">
-    Videos recomendados
-    <app-videos [videos]="videos" [col]="col"></app-videos>
+  <div class="col-12 col-lg-10 offset-lg-1">
+    <div class="row">
+      <div class="col-12 col-md-9">
+        <app-video-form-comment></app-video-form-comment>
+        <app-video-comments [videoId]="video.id"></app-video-comments>
+      </div>
+      <div class="col-12 col-md-3">
+        Videos recomendados
+        <app-videos [videos]="videos" [col]="col"></app-videos>
+      </div>
+    </div>
   </div>
 </div>

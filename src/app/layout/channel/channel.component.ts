@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./channel.component.scss']
 })
 export class ChannelComponent implements OnInit {
-
+  userId: number;
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

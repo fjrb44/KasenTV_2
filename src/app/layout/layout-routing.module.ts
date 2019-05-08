@@ -22,7 +22,7 @@ const routes: Routes = [
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'tendencies', loadChildren: './tendencies/tendencies.module#TendenciesModule'}, // <--- Muestra la pagina con las tendencias
             { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
-            { path: 'channel/:id', loadChildren: './channel/channel.module#ChannelModule'}, // <--- Muestra la cuenta con el id seleccionado
+            { path: 'channel/:channelId', loadChildren: './channel/channel.module#ChannelModule'}, // <--- Muestra la cuenta con el id seleccionado
             { path: 'account', loadChildren: ''}, // <--- Muestra la cuenta del usuario
             { path: 'video/:id', loadChildren: './video/video.module#VideoModule'}, // <--- Muestra el video seleccionado
             { path: 'list/:id', loadChildren: '' }, // <-- Muestra la lista de videos seleccionada

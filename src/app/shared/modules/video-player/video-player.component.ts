@@ -10,11 +10,15 @@ import { Video } from 'src/app/shared/models/video';
 export class VideoPlayerComponent implements OnInit {
   @Input("video") video: Video;
   url: string;
+  userId: number;
+  name: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.url = "localhost"+this.router.url;
+    this.userId = 1;
+    this.name = "Username";
   }
 
 }

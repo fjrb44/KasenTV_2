@@ -1,0 +1,63 @@
+div{
+    width: 100%;
+    text-align: center;
+
+    video{
+        width: 100%;
+        max-width: 1000px;    
+    }
+}
+
+.share-buttons{
+    a{
+        margin: 0 10px;
+
+        img{
+            transform: rotate(0);
+            transition: all .5s;
+            width: 40px;
+            
+            &:hover{
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
+
+.thousand{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.username{
+    outline: none;
+    cursor: pointer;
+    
+    .imgParent{
+        overflow: hidden;
+        border-radius: 100px;
+        padding: 0;
+        margin: 0;
+
+        img{
+            border-radius: 100px;
+            transition: all .5s;
+            transform: scale(1);
+        }
+    }
+
+    .channel{
+        outline: none;
+    }
+
+
+    &:hover{
+        color: orange;
+        .imgParent{
+            img{
+                transform: scale(1.2);
+            }
+        }
+    }
+
+}

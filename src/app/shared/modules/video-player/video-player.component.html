@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="video; else noVideo">
   <video controls>
     <!--
     <source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm">
@@ -14,18 +14,27 @@
   <h2>{{video.name}}</h2>
 </div>
 
+<ng-template #noVideo>
+  <div class="mb-5">
+    <video controls></video>
+  </div>
+</ng-template>
+
+
 <div class="row thousand">
-  <div class="col-12 col-md-5 col-lg-4">
-    <div class="row">
+  <div class="col-12 col-md-3">
+    <div class="row username">
       <div class="col-6">
-        <img class="img-thumbnail" src="http://placehold.it/100x100" alt="Logo Image">
+        <div class="imgParent">
+          <img class="img-thumbnail" src="http://placehold.it/100x100" alt="Logo Image">
+        </div>
       </div>
-      <div class="col-6">
-        Username
+      <div class="col-6 channel" routerLink="/channel/{{userId}}">
+        {{name}}
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-5 col-lg-6">
+  <div class="col-12 col-md-6">
     <div class="share-buttons">
       <!-- Facebook -->
       <a href="http://www.facebook.com/sharer.php?u=https://{{ url }}" target="_blank">
@@ -43,7 +52,7 @@
       </a>
     </div>    
   </div>
-  <div class="col-12 col-md-2 mt-3">
+  <div class="col-12 col-md-3 mt-3">
     <button class="btn btn-danger">Suscribe</button>
   </div>
 </div>
