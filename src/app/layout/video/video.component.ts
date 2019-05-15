@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Video } from 'src/app/shared/models/video';
+import { Video } from 'src/app/video/model/video';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from 'src/app/shared/services/videoService';
 import { Router, NavigationEnd } from '@angular/router';

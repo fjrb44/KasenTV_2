@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Video } from 'src/app/shared/models/video';
+import { Video } from '../model/video';
 
 @Component({
   selector: 'app-video-player',
