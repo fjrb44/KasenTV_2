@@ -11,7 +11,7 @@
 
     Your browser does not support HTML5 video.
   </video>
-  <h2>{{video.name}}</h2>
+  <h2>{{video.title}}</h2>
 </div>
 
 <ng-template #noVideo>
@@ -57,6 +57,6 @@
   </div>
 </div>
 
-<div class="mt-3">
-  Video description goes here
+<div *ngIf="video" class="mt-3">
+  {{ video.description }}
 </div>

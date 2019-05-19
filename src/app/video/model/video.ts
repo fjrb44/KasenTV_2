@@ -1,6 +1,11 @@
 export interface Video{
     id: number;
-    userId: number;
-    name: string;
+    created_at?: string;
+    updated_at?: string;
+    description?: string;
     url: string;
+    imageUrl: string;
+    title: string;
+    userId: number;
+    categoryId?: number;
 }

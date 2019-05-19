@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-12 col-md-9">
         <app-video-form-comment></app-video-form-comment>
-        <app-video-comments [videoId]="video.id"></app-video-comments>
+        <app-video-comments *ngIf="video" [videoId]="video.id"></app-video-comments>
       </div>
       <div class="col-12 col-md-3">
         Videos recomendados

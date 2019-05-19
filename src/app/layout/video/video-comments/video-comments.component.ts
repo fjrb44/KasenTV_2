@@ -15,8 +15,7 @@ export class VideoCommentsComponent implements OnInit {
   constructor( private commentService: CommentService ) { }
 
   ngOnInit() {
-
-    this.comments = this.commentService.getCommentsFromVideo(this.videoId);
+    this.commentService.getCommentsFromVideo(this.videoId).subscribe((data: Comment[]) => this.comments = data);
   }
 
   upvote(comment: Comment){

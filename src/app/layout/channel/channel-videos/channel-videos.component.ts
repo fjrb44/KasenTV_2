@@ -23,6 +23,7 @@ export class ChannelVideosComponent implements OnInit {
     
     this.userId = Number(url);
 
-    this.videos = this.videoService.getUserVideos(this.userId);
+    // this.videos = this.videoService.getUserVideos(this.userId);
+    this.videoService.getUserVideos(this.userId).subscribe( (data: Video[]) => (this.videos = data));
   }
 }

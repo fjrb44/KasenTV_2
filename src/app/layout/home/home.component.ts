@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   constructor(private videoService: VideoService) { }
 
   ngOnInit() {
-    this.videos = this.videoService.getHomeVideos();
+    //this.videos = this.videoService.getHomeVideos();
+    this.videoService.getHomeVideos().subscribe( (data: Video[]) => ( this.videos = data ) );    
   }
 
 }

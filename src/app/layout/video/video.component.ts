@@ -25,8 +25,15 @@ export class VideoComponent implements OnInit {
     this.id = Number(this.route.snapshot.paramMap.get("id"));
 
     this.col = "col-12 mt-3";
-    this.videos = this.videoService.getRecomendedVideos(this.id);
-    this.video = this.videoService.getVideo(this.id);
+    // this.videos = this.videoService.getRecomendedVideos(this.id);
+    //this.video = this.videoService.getVideo(this.id);
+
+    this.videoService.getRecomendedVideos(this.id).subscribe( (data: Video[]) =>{
+      this.videos = data;
+    });
+
+    this.videoService.getVideo(this.id)
+      .subscribe( (selectedVideo: Video) => (this.video = selectedVideo));
 
     this._router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
