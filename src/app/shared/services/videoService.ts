@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class VideoService {
     videos: Video[];
-
+    url: string;
     constructor(private http: HttpClient) {
         // this.videos = this.
         // id: number;
@@ -20,25 +20,30 @@ export class VideoService {
         // title: string;
         // userId: number;
         // categoryId?: number;
+        this.url = "http://localhost:8000/api/";
     }
 
     getVideo(id: number): Observable<Video>{
-        return this.http.get<Video>("http://localhost:8000/api/video/"+id);
+        return this.http.get<Video>(this.url+"videos/"+id);
     }
 
-    getRecomendedVideos(id: number): Observable<Video[]> {
-        return this.http.get<Video[]>("http://localhost:8000/api/video/");
+    getRecomendedVideos(userId: number, videoId: number): Observable<Video[]> {
+        return this.http.get<Video[]>(this.url+userId+"/videos/"+videoId);
     }
 
     getTendencies(): Observable<Video[]> {
-        return this.http.get<Video[]>("http://localhost:8000/api/video/");
+        return this.http.get<Video[]>(this.url+"videos/");
     }
 
-    getHomeVideos(): Observable<Video[]> {
-        return this.http.get<Video[]>("http://localhost:8000/api/video/");
+    getHomeVideos(userId: number): Observable<Video[]> {
+        return this.http.get<Video[]>(this.url+userId+"/videos");
     }
 
     getUserVideos(userId: number): Observable<Video[]>{
-        return this.http.get<Video[]>("http://localhost:8000/api/video/");
+        return this.http.get<Video[]>(this.url+"user/"+userId+"/videos");
+    }
+
+    getSearchVideos(search: string): Observable<Video[]>{
+        return this.http.get<Video[]>(this.url+"videos/search/"+search);
     }
 }

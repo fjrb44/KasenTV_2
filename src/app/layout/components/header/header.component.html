@@ -2,7 +2,7 @@
     <a class="navbar-brand" [routerLink]="['/']">Kasen TV</a>
     <a class="navbar-brand mobile" [routerLink]="['/']">KTV</a>
     
-    <form>
+    <form (submit)="search()">
         <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
     </form>
     
@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item dropdown" ngbDropdown>
                 <a class="nav-link" ngbDropdownToggle>
-                    <i class="fa fa-user"></i> John Smith <b class="caret"></b>
+                    <i class="fa fa-user"></i> John Snow <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu-right" ngbDropdownMenu>
                     <a class="dropdown-item" [routerLink]="['/channel']">

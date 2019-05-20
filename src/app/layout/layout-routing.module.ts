@@ -21,7 +21,7 @@ const routes: Routes = [
             { path: 'list/:id', loadChildren: '' }, // <-- Muestra la lista de videos seleccionada
             { path: 'upload', loadChildren: './upload/upload.module#UploadModule'/*, canActivate: [AuthGuard]*/}, // <-- Pagina para subir videos nuevos
             { path: 'settings', loadChildren: '', canActivate: [AuthGuard]}, // <-- Pagina para modificar los ajustes del usuario
-            { path: 'search', loadChildren: ''} // <--- Pagina para mostrar las busquedas
+            { path: 'search/:searchField', loadChildren: './search/search.module#SearchModule'} // <--- Pagina para mostrar las busquedas
         ]
     }
 ];

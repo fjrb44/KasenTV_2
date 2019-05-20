@@ -33,10 +33,12 @@ export class CommentService {
     // Hechar un vistazo en un futuro
   }
   getCommentsFromVideo(videoId): Observable<Comment[]> {
-    return this.http.get<Comment[]>(this.url+"video/"+videoId+"/coment");
+    return this.http.get<Comment[]>(this.url+"videos/"+videoId+"/comments");
   }
 
+  /*
   getAll(): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.url+"coment/");
   }
+  */
 }

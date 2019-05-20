@@ -13,7 +13,8 @@ export class VideoComponent implements OnInit {
   videos: Video[];
   video: Video;
   col: string;
-  id: number
+  videoId: number;
+  userId: number;
 
   constructor(
     private route: ActivatedRoute, 
@@ -22,17 +23,16 @@ export class VideoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get("id"));
+    this.videoId = Number(this.route.snapshot.paramMap.get("id"));
+    this.userId = 1;
 
     this.col = "col-12 mt-3";
-    // this.videos = this.videoService.getRecomendedVideos(this.id);
-    //this.video = this.videoService.getVideo(this.id);
 
-    this.videoService.getRecomendedVideos(this.id).subscribe( (data: Video[]) =>{
+    this.videoService.getRecomendedVideos(this.videoId, this.userId).subscribe( (data: Video[]) =>{
       this.videos = data;
     });
 
-    this.videoService.getVideo(this.id)
+    this.videoService.getVideo(this.videoId)
       .subscribe( (selectedVideo: Video) => (this.video = selectedVideo));
 
     this._router.routeReuseStrategy.shouldReuseRoute = function () {
