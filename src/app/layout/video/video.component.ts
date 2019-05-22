@@ -19,7 +19,7 @@ export class VideoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private videoService: VideoService, 
-    private _router: Router
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,13 +35,13 @@ export class VideoComponent implements OnInit {
     this.videoService.getVideo(this.videoId)
       .subscribe( (selectedVideo: Video) => (this.video = selectedVideo));
 
-    this._router.routeReuseStrategy.shouldReuseRoute = function () {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
 
-    this._router.events.subscribe((evt) => {
+    this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
-        this._router.navigated = false;
+        this.router.navigated = false;
         window.scrollTo(0, 0);
       }
     });

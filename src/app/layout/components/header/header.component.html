@@ -2,8 +2,8 @@
     <a class="navbar-brand" [routerLink]="['/']">Kasen TV</a>
     <a class="navbar-brand mobile" [routerLink]="['/']">KTV</a>
     
-    <form (submit)="search()">
-        <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
+    <form [formGroup]="form" (submit)="searchF()">
+        <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" formControlName="searchField">
     </form>
     
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">

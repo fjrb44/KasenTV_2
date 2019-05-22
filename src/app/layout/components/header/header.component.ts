@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-header',
@@ -9,9 +10,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    public form: FormGroup;
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(
+        private translate: TranslateService,
+        public router: Router,
+        public fb: FormBuilder
+    ) {
+    }
 
+    ngOnInit() {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -21,9 +29,11 @@ export class HeaderComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
-    }
 
-    ngOnInit() {
+        this.form = this.fb.group({
+            searchField: new FormControl('', Validators.required)
+        });
+
         this.pushRightClass = 'push-right';
     }
 
@@ -43,7 +53,7 @@ export class HeaderComponent implements OnInit {
         dom.classList.toggle('rtl');
     }
     */
-   
+
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
     }
@@ -52,7 +62,13 @@ export class HeaderComponent implements OnInit {
         this.translate.use(language);
     }
 
-    search(){
-        
+    searchF() {
+        this.router.navigate(['/search/' + this.form.get('searchField').value]);
+        this.router.events.subscribe((evt) => {
+            if (evt instanceof NavigationEnd) {
+                this.router.navigated = false;
+                window.scrollTo(0, 0);
+            }
+        });
     }
 }
