@@ -1,0 +1,35 @@
+.video{
+    border: none;
+    outline: none;
+    
+    div{
+        overflow: hidden;
+        width: 100%;
+
+        img{
+            width: 100%;
+            transition: all .2s;
+            transform: scale(1);
+        }
+    }
+
+    p{
+        text-align: center;
+        margin: 0;
+    }
+
+    .visualizations{
+        font-size: small;
+    }
+
+    &:hover{
+        
+        div > img{
+            transform: scale(1.2);
+        }
+
+        p{
+            color: orange;
+        }
+    }
+}

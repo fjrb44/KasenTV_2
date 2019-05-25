@@ -28,7 +28,8 @@ export class VideoService {
     }
 
     getRecomendedVideos(userId: number, videoId: number): Observable<Video[]> {
-        return this.http.get<Video[]>(this.url+userId+"/videos/"+videoId);
+        // /user/{userId}/recomend/{videoId}
+        return this.http.get<Video[]>(this.url+"user/"+userId+"/recomend/"+videoId);
     }
 
     getTendencies(): Observable<Video[]> {
@@ -36,7 +37,7 @@ export class VideoService {
     }
 
     getHomeVideos(userId: number): Observable<Video[]> {
-        return this.http.get<Video[]>(this.url+userId+"/videos");
+        return this.http.get<Video[]>(this.url+"user/"+userId+"/home");
     }
 
     getUserVideos(userId: number): Observable<Video[]>{
@@ -45,5 +46,9 @@ export class VideoService {
 
     getSearchVideos(search: string): Observable<Video[]>{
         return this.http.get<Video[]>(this.url+"videos/search/"+search);
+    }
+
+    getUserSearchVideos(userId: number, search: string): Observable<Video[]>{
+        return this.http.get<Video[]>(this.url+"user/"+userId+"/videos/search/"+search);
     }
 }

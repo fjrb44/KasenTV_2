@@ -8,4 +8,7 @@ export interface Video{
     title: string;
     userId: number;
     categoryId?: number;
+    visualizations: number;
+    username: string;
+    userLogo: string;
 }

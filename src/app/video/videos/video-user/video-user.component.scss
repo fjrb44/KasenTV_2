@@ -1,0 +1,29 @@
+.user{
+    border: none;
+    outline: none;
+
+    >div{
+        width: 100%;
+        overflow: hidden;
+
+        img{
+            border-radius: 50%;
+            width: 100%;
+            transition: all .2s;
+            transform: scale(1);
+            max-height: 20px;
+            max-width: 20px;
+        }
+    }
+
+    &:hover{
+        
+        div > img{
+            transform: scale(1.1);
+        }
+
+        p{
+            color: orange;
+        }
+    }
+}

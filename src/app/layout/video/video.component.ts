@@ -12,7 +12,6 @@ import { Router, NavigationEnd } from '@angular/router';
 export class VideoComponent implements OnInit {
   videos: Video[];
   video: Video;
-  col: string;
   videoId: number;
   userId: number;
 
@@ -25,8 +24,6 @@ export class VideoComponent implements OnInit {
   ngOnInit() {
     this.videoId = Number(this.route.snapshot.paramMap.get("id"));
     this.userId = 1;
-
-    this.col = "col-12 mt-3";
 
     this.videoService.getRecomendedVideos(this.videoId, this.userId).subscribe( (data: Video[]) =>{
       this.videos = data;

@@ -8,14 +8,22 @@ import { Video } from '../model/video';
 })
 export class VideosComponent implements OnInit {
   @Input("videos") public videos: Video[];
-  @Input("col") public col: string;
+  // @Input("col") public col: string;
+  @Input("oneColumn") public oneColumn: boolean;
+  @Input("hideUser") public hideUser: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    if(!this.col){
-      this.col = "col-12 col-md-4 col-lg-3 mt-3"
+    if(!this.oneColumn){
+      this.oneColumn = false;
+      // this.col = ""
     }
+
+    if(!this.hideUser){
+      this.hideUser = false;
+    }
+
   }
 
 }
