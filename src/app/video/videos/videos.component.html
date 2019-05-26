@@ -11,7 +11,9 @@
     <app-video-user [video]="video" *ngIf="!hideUser"></app-video-user>
   </div>
 </div>
-
+<div *ngIf="!videos" class="row">
+  <div class="loader"></div>
+</div>
 <!--
 <div class="row" *ngIf="videos">
   <div class="{{col}} video" *ngFor="let video of videos" routerLink="/video/{{video.id}}">

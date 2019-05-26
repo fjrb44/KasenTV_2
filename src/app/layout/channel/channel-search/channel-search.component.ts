@@ -13,13 +13,17 @@ export class ChannelSearchComponent implements OnInit {
   search: string;
   userId: number;
 
-  constructor( private videoService: VideoService, private route: ActivatedRoute, private urlRoute: Router) { }
+  constructor( 
+    private videoService: VideoService, 
+    private route: ActivatedRoute, 
+    private urlRoute: Router
+  ) { }
 
   ngOnInit() {
     this.search = this.route.snapshot.paramMap.get("search");
     
     let url = this.urlRoute.url;
-    url = url.substring( url.indexOf('channel')+8, url.indexOf('search')-1 );
+    url = url.substring( url.indexOf('channel')+8, url.indexOf('/search') );
     
     this.userId = Number(url);
 

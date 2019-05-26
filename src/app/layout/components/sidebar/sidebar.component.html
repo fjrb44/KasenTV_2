@@ -1,14 +1,28 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
+        <div>
+            <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-home"></i>&nbsp;
+                <span>{{ 'Inicio' | translate }}</span>
+            </a>
+        </div>
+        <div>
+            <a [routerLink]="['/tendencies']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-fire"></i>&nbsp;
+                <span>{{ 'Tendencies' | translate }}</span>
+            </a>
+        </div>
+        <div class="separator"></div>
+        
+        <div *ngFor="let category of categories" >
+            <a routerLink="/category/{{ category.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="{{ category.logo }}"></i>&nbsp;
+                <span>{{ category.name }}</span>
+            </a>    
+        </div>
+        
 
-        <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-home"></i>&nbsp;
-            <span>{{ 'Inicio' | translate }}</span>
-        </a>
-        <a [routerLink]="['/tendencies']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fire"></i>&nbsp;
-            <span>{{ 'Tendencies' | translate }}</span>
-        </a>
+        <!--
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <i class="fa fa-plus"></i>&nbsp;
@@ -31,6 +45,7 @@
                 </ul>
             </li>
         </div>
+        -->
 
         <!-- Menu superior version movil -->
         <div class="header-fields">

@@ -28,7 +28,6 @@ export class VideoService {
     }
 
     getRecomendedVideos(userId: number, videoId: number): Observable<Video[]> {
-        // /user/{userId}/recomend/{videoId}
         return this.http.get<Video[]>(this.url+"user/"+userId+"/recomend/"+videoId);
     }
 
@@ -50,5 +49,9 @@ export class VideoService {
 
     getUserSearchVideos(userId: number, search: string): Observable<Video[]>{
         return this.http.get<Video[]>(this.url+"user/"+userId+"/videos/search/"+search);
+    }
+
+    getCategoryVideos(categoryId: number){
+        return this.http.get<Video[]>(this.url+"category/"+categoryId+"/videos");
     }
 }

@@ -17,7 +17,6 @@ export class VideosComponent implements OnInit {
   ngOnInit() {
     if(!this.oneColumn){
       this.oneColumn = false;
-      // this.col = ""
     }
 
     if(!this.hideUser){

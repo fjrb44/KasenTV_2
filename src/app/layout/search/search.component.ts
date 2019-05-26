@@ -12,11 +12,14 @@ export class SearchComponent implements OnInit {
   videos: Video[];
   searchField: string;
 
-  constructor(private videoService: VideoService, private route: ActivatedRoute) { }
+  constructor(
+    private videoService: VideoService, 
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.searchField = this.route.snapshot.paramMap.get("searchField");
-    this.videoService.getSearchVideos(this.searchField).subscribe( (data: Video[]) => ( this.videos = data ) );    
+    this.videoService.getSearchVideos(this.searchField).subscribe( (data: Video[]) => ( this.videos = data ) );
   }
 
 }

@@ -8,9 +8,10 @@ import { ChannelVideosComponent } from './channel-videos/channel-videos.componen
 import { VideoListComponent } from './video-list/video-list.component';
 import { ChannelSearchComponent } from './channel-search/channel-search.component';
 import { VideosModule } from 'src/app/video/videos/videos.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [CommonModule, ChannelRoutingModule, PageHeaderModule, VideosModule],
+    imports: [CommonModule, ChannelRoutingModule, PageHeaderModule, VideosModule, ReactiveFormsModule],
     declarations: [ChannelComponent, ChannelVideosComponent, VideoListComponent, ChannelSearchComponent]
 })
 export class ChannelModule {}
