@@ -25,4 +25,7 @@ export class VideosComponent implements OnInit {
 
   }
 
+  isVideosEmpty(): boolean{
+    return (this.videos.length == 0) ? true: false;
+  }
 }

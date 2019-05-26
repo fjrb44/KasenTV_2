@@ -15,7 +15,7 @@
         <div class="separator"></div>
         
         <div *ngFor="let category of categories" >
-            <a routerLink="/category/{{ category.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <a (click)="changeCategory(category.id)" routerLink="/category/{{ category.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
                 <i class="{{ category.logo }}"></i>&nbsp;
                 <span>{{ category.name }}</span>
             </a>    

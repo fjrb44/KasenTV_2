@@ -1,0 +1,14 @@
+<div *ngIf="users">
+  <div *ngFor="let user of users">
+    <div class="users" routerLink="/channel/{{user.id}}">
+      <div>
+        <img class="img-thumbnail" src="{{ user.logo}}" alt="Logo Image">
+      </div>
+      <p>{{ user.username }}</p>
+      <p class="seguidores" *ngIf="user.followers == 1; else moreFollowers">{{ video.visualizations }} seguidor</p>
+      <ng-template #moreFollowers>
+        <p class="seguidores">{{ video.visualizations }} seguidores</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

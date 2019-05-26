@@ -1,8 +1,10 @@
 <div class="user row" routerLink="/channel/{{video.userId}}">
-  <div class="col-6 col-lg-5">
+  <div class="col">
     <div>
-      <img class="img-thumbnail userLogo" src="{{ video.userLogo}}" alt="">
+      <div>
+        <img class="img-thumbnail userLogo" src="{{ video.userLogo}}" alt="">
+      </div>
+      <p>{{ video.username}}</p>
     </div>
-    <p>{{ video.username}}</p>
   </div>
 </div>

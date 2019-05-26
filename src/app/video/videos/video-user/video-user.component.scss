@@ -4,38 +4,44 @@
     cursor: pointer;
 
     >div{
-        margin: 0 auto;
+        width: 100%;
 
         >div{
-            overflow: hidden;
-            width: fit-content;
-            float: left;
-            margin: 0 2%;
-
-            img{
-                border-radius: 50%;
-                width: 100%;
-                transition: all .2s;
-                transform: scale(0.9);
-                max-height: 20px;
-                max-width: 20px;
+            max-width: 100px;
+            margin-left: 30%;
+            margin-right: 30%;
+    
+            >div{
+                overflow: hidden;
+                width: fit-content;
+                float: left;
+                margin: 0 2%;
+    
+                .userLogo{
+                    border-radius: 50%;
+                    width: 100%;
+                    transition: all .2s;
+                    transform: scale(0.9);
+                    max-height: 20px;
+                    max-width: 20px;
+                }
             }
-        }
-
-        >p{
-            display: block;
-            margin-bottom: 0;
+    
+            >p{
+                display: block;
+                margin-bottom: 0;
+            }
         }
     }
 
     &:hover{
-        
-        div > img{
-            transform: scale(1);
-        }
 
         p{
             color: orange;
+        }
+
+        .userLogo{
+            transform: scale(1);
         }
     }
 }

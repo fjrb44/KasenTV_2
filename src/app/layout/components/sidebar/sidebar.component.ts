@@ -81,4 +81,19 @@ export class SidebarComponent implements OnInit {
     onLoggedout() {
         // localStorage.removeItem('isLoggedin');
     }
+
+    changeCategory(id: number){
+        this.router.navigate(['/category/' + id ]);
+        
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
+
+        this.router.events.subscribe((evt) => {
+            if (evt instanceof NavigationEnd) {
+                this.router.navigated = false;
+                window.scrollTo(0, 0);
+            }
+        });
+    }
 }
