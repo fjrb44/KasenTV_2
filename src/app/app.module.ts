@@ -8,8 +8,6 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ShowUserComponent } from './user/show-user/show-user.component';
-// import { VideosModule } from './video/videos/videos.module';
 
 @NgModule({
     imports: [
@@ -19,9 +17,8 @@ import { ShowUserComponent } from './user/show-user/show-user.component';
         HttpClientModule,
         LanguageTranslationModule,
         AppRoutingModule,
-        // VideosModule
     ],
-    declarations: [AppComponent, ShowUserComponent],
+    declarations: [AppComponent],
     providers: [AuthGuard],
     bootstrap: [AppComponent]
 })

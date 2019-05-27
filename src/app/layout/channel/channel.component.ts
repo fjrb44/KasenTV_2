@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/user/model/user';
 
 @Component({
   selector: 'app-channel',
@@ -10,10 +12,12 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class ChannelComponent implements OnInit {
   public userId: number;
   public form: FormGroup;
+  public user: User;
 
   constructor(
     public router: Router, 
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,8 @@ export class ChannelComponent implements OnInit {
     this.form = this.fb.group({
       searchUserField: new FormControl('', Validators.required)
     });
+
+    this.userService.getUser(this.userId).subscribe( (data: User) => this.user = data);
   }
 
   searchUserVideo() {

@@ -1,36 +1,43 @@
-<img class="img-thumbnail col-12" src="http://placehold.it/1200x400" alt="Banner Image">
+<div *ngIf="user">
+  <img *ngIf="user" class="img-thumbnail col-12" src="{{ user.banner }}" alt="Banner Image">
 
-<div class="row mt-3 mb-3 align-content-center">
-  <div class="col-md-2 col-12">
-    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="Logo Image">
+  <div class="row mt-3 mb-3 align-content-center">
+    <div class="col-md-2 col-12">
+      <img class="img-thumbnail" src="{{ user.logo }}" alt="Logo Image">
+    </div>
+    <div class="col-12 col-md-8 mt-1">
+      <h1>{{ user.username }}</h1>
+      <h5 class="seguidores" *ngIf="user.followers == 1; else moreFollowers">{{ user.followers }} seguidor</h5>
+      <ng-template #moreFollowers>
+        <h5 class="seguidores">{{ user.followers }} seguidores</h5>
+      </ng-template>
+    </div>
+    <div class="col-12 col-md-2">
+      <button class="btn btn-suscribe">Suscribe</button>
+    </div>
   </div>
-  <div class="col-12 col-md-8 mt-1">
-    <h1>UserName</h1>
-    <h5>10 suscriptores</h5>
-  </div>
-  <div class="col-12 col-md-2">
-    <button class="btn btn-suscribe">Suscribe</button>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3 col-12">
+    <div class="navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['videos']">Videos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['lists']">Lists</a>
+        </li>
+      </ul>
+  
+      <form [formGroup]="form" (submit)="searchUserVideo()" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" formControlName="searchUserField">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" [disabled]="!form.valid">Search</button>
+      </form>
+    </div>
+  </nav>
+  
+  <div class="col-12">
+    <router-outlet></router-outlet>
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3 col-12">
-  <div class="navbar-collapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['videos']">Videos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['lists']">Lists</a>
-      </li>
-    </ul>
-
-    <form [formGroup]="form" (submit)="searchUserVideo()" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" formControlName="searchUserField">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit" [disabled]="!form.valid">Search</button>
-    </form>
-  </div>
-</nav>
-
-<div class="col-12">
-  <router-outlet></router-outlet>
-</div>
+<app-loader *ngIf="!user"></app-loader>

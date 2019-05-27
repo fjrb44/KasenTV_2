@@ -7,11 +7,16 @@ import { User } from '../model/user';
   styleUrls: ['./show-user.component.scss']
 })
 export class ShowUserComponent implements OnInit {
-  @Input("users") public user: User[];
+  @Input("users") public users: User[];
   
   constructor() { }
 
   ngOnInit() {
+    console.log(this.users);
+  }
+
+  areSomeUsers(): boolean{
+    return this.users.length != 0;
   }
 
 }
