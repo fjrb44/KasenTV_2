@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
     selector: 'app-header',
@@ -11,11 +12,13 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     public form: FormGroup;
+    public mainUrl: string;
 
     constructor(
         private translate: TranslateService,
         public router: Router,
-        public fb: FormBuilder
+        public fb: FormBuilder,
+        private ownUserService: OwnUserService
     ) {
     }
 
@@ -35,6 +38,7 @@ export class HeaderComponent implements OnInit {
         });
 
         this.pushRightClass = 'push-right';
+        this.mainUrl = "/user/"+this.ownUserService.getId();
     }
 
     isToggled(): boolean {
@@ -63,12 +67,18 @@ export class HeaderComponent implements OnInit {
     }
 
     searchF() {
-        this.router.navigate(['/search/' + this.form.get('searchField').value]);
-        this.router.events.subscribe((evt) => {
-            if (evt instanceof NavigationEnd) {
-                this.router.navigated = false;
-                window.scrollTo(0, 0);
-            }
-        });
+        let search = this.form.get('searchField').value;
+
+        if(search){
+            this.router.navigate([ this.mainUrl + '/search/' + this.form.get('searchField').value]);
+            this.router.events.subscribe((evt) => {
+                if (evt instanceof NavigationEnd) {
+                    this.router.navigated = false;
+                    window.scrollTo(0, 0);
+                }
+            });
+        }else{
+            this.router.navigate([ this.mainUrl+"/"]);
+        }
     }
 }

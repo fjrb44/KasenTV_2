@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Video } from '../model/video';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-video-player',
@@ -10,14 +11,17 @@ import { Video } from '../model/video';
 export class VideoPlayerComponent implements OnInit {
   @Input("video") video: Video;
   url: string;
-  userId: number;
+  userId: string;
   name: string;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router, 
+    private ownUserService: OwnUserService
+  ) { }
 
   ngOnInit() {
     this.url = "localhost"+this.router.url;
-    this.userId = 1;
+    this.userId = this.ownUserService.getId();
     this.name = "Username";
   }
 

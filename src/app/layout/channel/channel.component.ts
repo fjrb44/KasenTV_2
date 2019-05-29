@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/user/model/user';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-channel',
@@ -17,7 +18,8 @@ export class ChannelComponent implements OnInit {
   constructor(
     public router: Router, 
     public fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private ownUserService: OwnUserService
   ) { }
 
   ngOnInit() {
@@ -36,17 +38,25 @@ export class ChannelComponent implements OnInit {
   }
 
   searchUserVideo() {
-    this.router.navigate(["/channel/"+this.userId+"/search/"+this.form.get("searchUserField").value]);
-    
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
+    let search = this.form.get("searchUserField").value;
+    let userId = this.ownUserService.getId();
 
-    this.router.events.subscribe((evt) => {
-        if (evt instanceof NavigationEnd) {
-          this.router.navigated = false;
-          window.scrollTo(0, 0);
-        }
-    });
+    if(search){
+      this.router.navigate(["/user/"+ userId +"/channel/"+this.userId+"/search/"+ search]);
+    
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
+  
+      this.router.events.subscribe((evt) => {
+          if (evt instanceof NavigationEnd) {
+            this.router.navigated = false;
+            window.scrollTo(0, 0);
+          }
+      });
+    }else{
+      this.router.navigate(["/user"+ userId +"/videos"]);
+    }
+    
   }
 }

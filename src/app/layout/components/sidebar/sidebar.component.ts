@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Category } from 'src/app/shared/models/category';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -15,10 +16,19 @@ export class SidebarComponent implements OnInit {
     showMenu: string;
     pushRightClass: string;
     categories: Category[];
+    mainUrl: string;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, public router: Router, private categoryService: CategoryService) {
+    constructor(
+        private translate: TranslateService, 
+        public router: Router, 
+        private categoryService: CategoryService,
+        private ownUserService: OwnUserService
+    ) {
+    }
+
+    ngOnInit() {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -28,14 +38,13 @@ export class SidebarComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
-    }
-
-    ngOnInit() {
+        
         this.isActive = false;
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
 
+        this.mainUrl = "/user/"+this.ownUserService.getId();
         this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
     }
 
@@ -83,7 +92,7 @@ export class SidebarComponent implements OnInit {
     }
 
     changeCategory(id: number){
-        this.router.navigate(['/category/' + id ]);
+        this.router.navigate([this.mainUrl + '/category/' + id ]);
         
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
