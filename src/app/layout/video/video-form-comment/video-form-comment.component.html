@@ -3,9 +3,10 @@
     <img class="img-thumbnail" src="http://placehold.it/200x200" alt="Logo Image">
   </div>
   <div class="col-9 col-lg-10 mb-3">
-    <form action="">
-      <textarea name="textaread" id="" class="textarea" placeholder="Add a public comment"></textarea>
+    <form [formGroup]="form" (submit)="onCommentUserVideo()">
+      <textarea name="text" id="" class="textarea" placeholder="Add a public comment" formControlName="text"></textarea>
       <button class="btn btn-success">Submit</button>
     </form>
+    {{ form.value | json }}
   </div>
 </div>
