@@ -12,7 +12,7 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'prefix' }, // <-- Redireccion hacia la pagina home
+            { path: '', redirectTo:'home', pathMatch: 'prefix' }, // <-- Redireccion hacia la pagina home
             { path: 'home', loadChildren: './home/home.module#HomeModule' }, // <--- Muestra la pagina home
             { path: 'tendencies', loadChildren: './tendencies/tendencies.module#TendenciesModule'}, // <--- Muestra la pagina con las tendencias
             { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
