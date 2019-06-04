@@ -12,7 +12,6 @@ export class ShowUserComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.users);
   }
 
   areSomeUsers(): boolean{

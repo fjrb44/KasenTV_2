@@ -70,6 +70,10 @@ export class HeaderComponent implements OnInit {
         let search = this.form.get('searchField').value;
 
         if(search){
+            this.router.routeReuseStrategy.shouldReuseRoute = function () {
+                return false;
+            };
+
             this.router.navigate([ this.mainUrl + '/search/' + this.form.get('searchField').value]);
             this.router.events.subscribe((evt) => {
                 if (evt instanceof NavigationEnd) {

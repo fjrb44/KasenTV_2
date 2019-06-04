@@ -24,18 +24,12 @@ export class CommentService {
     console.log(comment);
 
     const httpOptions = {
-
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
         'Accept': 'application/json, text/plain, */*',
         'App-Version': '1',
       })
-
     };
-
-
-
 
     return this.http.post<Comment>(this.url + '/user/1/videos/1/newComment', comment, httpOptions);
     // Hechar un vistazo en un futuro
