@@ -35,4 +35,18 @@ export class OwnUserService {
     return userId;
   }
 
+  getActualVideo(): number{
+    let videoId: number;
+
+    let videoUrl = this.route.url;
+    videoUrl = videoUrl.substring( videoUrl.indexOf('video/')+6, videoUrl.length);
+
+    videoId = Number(videoUrl);
+
+    if(isNaN(videoId)){
+      return 0;
+    }
+
+    return videoId;
+  }
 }

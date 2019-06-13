@@ -8,7 +8,6 @@ import { VideoRoutingModule } from './video-routing.module';
 import { VideoCommentsComponent } from './video-comments/video-comments.component';
 import { VideosModule } from 'src/app/video/videos/videos.module';
 import { VideoPlayerModule } from 'src/app/video/video-player/video-player.module';
-import { VideoFormCommentComponent } from './video-form-comment/video-form-comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       FormsModule,
       ReactiveFormsModule
     ],
-    declarations: [VideoComponent, VideoCommentsComponent, VideoFormCommentComponent]
+    declarations: [VideoComponent, VideoCommentsComponent]
     // declarations: [VideoComponent, VideoPlayerComponent, VideoCommentsComponent, VideoFormCommentComponent]
 })
 export class VideoModule {}

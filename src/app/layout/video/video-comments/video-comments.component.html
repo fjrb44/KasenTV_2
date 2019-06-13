@@ -1,15 +1,44 @@
+<div class="row mt-5">
+  <div class="col-3 col-lg-2">
+    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="Logo Image">
+  </div>
+  <div class="col-9 col-lg-10 mb-3">
+    <form [formGroup]="form" (submit)="onCommentUserVideo()">
+      <textarea name="text" class="textarea" placeholder="Add a public comment" formControlName="text"></textarea>
+
+      <div *ngIf="text.invalid && (text.dirty || text.touched)" class="alert alert-danger">
+
+        <div *ngIf="text.errors.required">
+          El texto es requerido.
+        </div>
+        <div *ngIf="text.errors.minlength">
+          El texto debe tener una longitud mayor a 5.
+        </div>
+        <div *ngIf="text.errors.maxlength">
+          El texto debe tener una longitud inferior a 255.
+        </div>
+
+      </div>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>
+
 <div *ngIf="videoId">
   <div class="row mt-2 comment" *ngFor="let comment of comments">
     <div class="col-3 col-lg-2 offset-lg-1">
       <img class="img-thumbnail" src="http://placehold.it/100x100" alt="Logo Image">
     </div>
     <div class="col-9 col-lg-9">
+      {{ comment | json }}
       <h4>{{comment.user}}</h4>
-      <p>{{comment.comment}}</p>
+      <p>{{comment.text}}</p>
+      <!--
       <p>
         <i class="fa fa-thumbs-o-up votes" (click)="upvote(comment)"></i>{{comment.upvotes}}
         <i class="fa fa-thumbs-o-down votes" (click)="downvote(comment)"></i>
       </p>
+      -->
     </div>
   </div>
 </div>

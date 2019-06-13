@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Comment } from '../models/comment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { commentUpload } from '../models/commentUpload';
+import { OwnUserService } from './own-user.service';
 
 
 @Injectable({
@@ -10,34 +12,37 @@ import { Observable, of } from 'rxjs';
 export class CommentService {
   url: string;
 
-  commentUpload = {
-    'text': 'Some stupid text'
-  };
-
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ownUserService: OwnUserService) {
     this.url = 'http://localhost:8000/api';
   }
 
 
-  addComment(comment: Comment): Observable<Comment> {
-    console.log(comment);
+  addComment(comment: string): Observable<Comment> {
+    if(!this.ownUserService.isLogged()){
+      return;
+    }
+    let videoId = this.ownUserService.getActualVideo();
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json, text/plain, */*',
-        'App-Version': '1',
-      })
+    if(!videoId){
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
+    var user = this.ownUserService.getId();
+
+    var commentUpload: commentUpload = {
+      'text': comment
     };
 
-    return this.http.post<Comment>(this.url + '/user/1/videos/1/newComment', comment, httpOptions);
-    // Hechar un vistazo en un futuro
-
+    return this.http.post<Comment>(this.url + '/user/'+user+'/videos/'+videoId+'/newComment', commentUpload, { headers: headers});
   }
 
 
   getCommentsFromVideo(videoId): Observable<Comment[]> {
+    console.log(this.url + '/videos/' + videoId + '/comments');
     return this.http.get<Comment[]>(this.url + '/videos/' + videoId + '/comments');
   }
 
