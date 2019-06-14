@@ -1,7 +1,27 @@
-<form>
-    <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)">
-    <button class="btn btn-success" (click)="fileInput.click()">Upload a video</button>
+<form [formGroup]="form" (submit)="onUpload()">
+    <div *ngIf="video">
+        {{ video || json }}
+    </div>
+    <input name="url" type="file" #videoInput style="display:none" (change)="onVideoSelected($event)">
+    <p class="btn btn-success" (click)="videoInput.click()">Sube un video</p>
 
-    <button (click)="onUpload()" type="submit">Enviar</button>
+    <div *ngIf="image">
+        {{ image || json }}
+    </div>
+    <input name="imageUrl" type="file" #imageInput style="display:none" (change)="onImageSelected($event)">
+    <p class="btn btn-success" (click)="imageInput.click()">Sube una miniatura</p>
 
+    <input type="text" name="tittle">
+
+    <input type="text" name="description">
+    <button type="submit">Enviar</button>
 </form>
+
+<!--
+"description" => ["max:2000"],
+"url" => ["required", "mimes:mp4,mov,ogg"],
+"imageUrl" => ["required", "image", "mimes:jpg,jpeg,png,gif,webp"],
+"title" => ["required","min:4", "max:100"],
+"userId" => ["required", "numeric"],
+"categoryId" =>["numeric"]
+-->

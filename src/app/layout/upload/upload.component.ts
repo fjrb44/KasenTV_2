@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/models/category';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-upload',
@@ -10,31 +11,65 @@ import { Category } from 'src/app/shared/models/category';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  file: File;
+  video: File;
+  image: File;
   form: FormGroup;
   categories: Category[];
-  
+  userId: number;
+
   constructor(
     private http: HttpClient, 
     private fb: FormBuilder,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private ownUserService: OwnUserService
   ) { }
 
   ngOnInit() {
-    this.file = null;
+    this.video = null;
+    this.image = null;
+
     this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
+
+    this.form = this.fb.group({
+      text: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])
+    });
+
+    if(this.ownUserService.isLogged()){
+      this.userId = Number(this.ownUserService.getId());
+    }else{
+      this.userId = 0;
+    }
   }
 
-  onFileSelected(event){
-    this.file = <File>event.target.files[0];
+  onVideoSelected(event){
+    this.video = <File>event.target.files[0];
+
+    console.log(event.target.files[0]);
+  }
+
+  onImageSelected(event){
+    this.image = <File>event.target.files[0];
   }
 
   onUpload() {
-    const fd = new FormData;
-    fd.append('image', this.file, this.file.name);
+    // const fd = new FormData;
+    // fd.append('video', this.video);
+    // fd.append('image', this.image);
 
+    let fd = {
+      'description': "aasdf",
+      "url": this.video,
+      "imageUrl": this.image,
+      "title": "Asdfg",
+      "userId": "1",
+      "categoryId": "1"
+    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
-    this.http.post('somewhere', fd, {
+    this.http.post('http://localhost:8000/api/user/'+this.userId+'/newVideo', fd, {
+      headers: headers,
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {
@@ -43,8 +78,7 @@ export class UploadComponent implements OnInit {
       } else if (event.type === HttpEventType.Response) {
         console.log(event);
       }
-    })
-    console.log(fd);
+    });
   }
 }
 
