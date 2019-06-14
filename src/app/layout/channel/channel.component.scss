@@ -5,12 +5,3 @@
     url("https://yoursite.com/css/fonts/CustomFont.otf") format("opentype"),
     url("https://yoursite.com/css/fonts/CustomFont.svg#filename") format("svg");
 }
-
-.btn-suscribe{
-    background-color: #FF7F50;
-    color: white;
-
-    &:hover{
-        background-color: #FF4500;
-    }
-}

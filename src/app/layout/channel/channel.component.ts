@@ -11,9 +11,10 @@ import { OwnUserService } from 'src/app/shared/services/own-user.service';
   styleUrls: ['./channel.component.scss']
 })
 export class ChannelComponent implements OnInit {
-  public userId: number;
+  public channelId: number;
   public form: FormGroup;
   public user: User;
+  public userId: number;
 
   constructor(
     public router: Router, 
@@ -27,14 +28,19 @@ export class ChannelComponent implements OnInit {
     url = url.substring( url.indexOf('channel')+8, url.length );
     url = url.substring(0, url.indexOf('/'));
 
+    this.channelId = Number(url);
 
-    this.userId = Number(url);
-    
+    if(this.ownUserService.isLogged()){
+      this.userId = Number(this.ownUserService.getId());
+    }else{
+      this.userId = 0;
+    }
+
     this.form = this.fb.group({
       searchUserField: new FormControl('', Validators.required)
     });
 
-    this.userService.getUser(this.userId).subscribe( (data: User) => this.user = data);
+    this.userService.getUser(this.channelId).subscribe( (data: User) => this.user = data);
   }
 
   searchUserVideo() {
@@ -42,7 +48,7 @@ export class ChannelComponent implements OnInit {
     let userId = this.ownUserService.getId();
 
     if(search){
-      this.router.navigate(["/user/"+ userId +"/channel/"+this.userId+"/search/"+ search]);
+      this.router.navigate(["/user/"+ userId +"/channel/"+this.channelId+"/search/"+ search]);
     
       this.router.routeReuseStrategy.shouldReuseRoute = function () {
         return false;

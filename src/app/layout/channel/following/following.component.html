@@ -1,0 +1,6 @@
+<div *ngIf="users">
+  <app-show-user [users]="users" [message]="'No esta suscrito a nadie'"></app-show-user>
+</div>
+<div *ngIf="!users">
+  <app-loader></app-loader>
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="showButton">
+  <div *ngIf="isSuscribe">
+    <button class="btn btn-suscribe" (click)="suscribe()">Suscribe</button>
+  </div>
+  <div *ngIf="!isSuscribe">
+    <button class="btn btn-suscribe" (click)="unsuscribe()">Unsuscribe</button>  
+  </div>
+</div>

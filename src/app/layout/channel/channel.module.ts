@@ -10,9 +10,12 @@ import { ChannelSearchComponent } from './channel-search/channel-search.componen
 import { VideosModule } from 'src/app/video/videos/videos.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderModule } from 'src/app/shared/component/loader/loader.module';
+import { FollowingComponent } from './following/following.component';
+import { ShowUserModule } from 'src/app/user/show-user/show-user.module';
+import { SuscribeButtonModule } from 'src/app/shared/component/suscribe-button/suscribe-button.module';
 
 @NgModule({
-    imports: [CommonModule, ChannelRoutingModule, PageHeaderModule, VideosModule, ReactiveFormsModule, LoaderModule],
-    declarations: [ChannelComponent, ChannelVideosComponent, VideoListComponent, ChannelSearchComponent]
+    imports: [CommonModule, ChannelRoutingModule, PageHeaderModule, VideosModule, ReactiveFormsModule, LoaderModule, ShowUserModule, SuscribeButtonModule],
+    declarations: [ChannelComponent, ChannelVideosComponent, VideoListComponent, ChannelSearchComponent, FollowingComponent]
 })
 export class ChannelModule {}

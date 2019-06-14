@@ -4,6 +4,7 @@ import { ChannelComponent } from './channel.component';
 import { ChannelVideosComponent } from './channel-videos/channel-videos.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { ChannelSearchComponent } from './channel-search/channel-search.component';
+import { FollowingComponent } from './following/following.component';
 
 const routes: Routes = [
     {
@@ -11,7 +12,8 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'videos', pathMatch: 'prefix' },
           { path: 'videos', component: ChannelVideosComponent },
-          { path: 'lists', component: VideoListComponent },
+          // { path: 'lists', component: VideoListComponent },
+          { path: 'following', component: FollowingComponent },
           { path: 'search/:search', component: ChannelSearchComponent }
         ]
     }

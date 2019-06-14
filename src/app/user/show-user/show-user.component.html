@@ -1,7 +1,7 @@
 <div *ngIf="users">
   <div *ngIf="areSomeUsers()" class="row justify-content-center">
     <div *ngFor="let user of users">
-      <div class="users" routerLink="/channel/{{user.id}}">
+      <div class="users" (click)="reload()" routerLink="{{url}}{{user.id}}">
         <div>
           <img class="img-thumbnail" src="{{ user.logo }}" alt="Logo Image">
         </div>
@@ -12,5 +12,8 @@
         </ng-template>
       </div>
     </div>
+  </div>
+  <div *ngIf="showMessage && !areSomeUsers()" class="message">
+    <h3>{{ message }}</h3>
   </div>
 </div>

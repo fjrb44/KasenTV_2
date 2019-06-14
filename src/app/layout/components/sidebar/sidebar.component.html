@@ -12,16 +12,27 @@
                 <span>{{ 'Tendencies' | translate }}</span>
             </a>
         </div>
-        <div class="separator"></div>
+        <div *ngIf="ownUserService.isLogged()">
+            <div *ngIf="suscriptions && suscriptions.length != 0">
+                <div class="separator"></div>
+                <div *ngFor="let suscription of suscriptions">
+                    <a (click)="changeType(suscription.id, 'channel')" routerLink="{{ mainUrl }}/channel/{{ suscription.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                        <div class="divLogo"><img class="logo" src="{{suscription.logo}}" alt="userlogo"></div>&nbsp;
+                        <span>{{ suscription.username }}</span>
+                    </a> 
+                </div>
+            </div>
+        </div>
         
+        <div class="separator"></div>
+
         <div *ngFor="let category of categories" >
-            <a (click)="changeCategory(category.id)" routerLink="{{ mainUrl }}/category/{{ category.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <a (click)="changeType(category.id, 'category')" routerLink="{{ mainUrl }}/category/{{ category.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
                 <i class="{{ category.logo }}"></i>&nbsp;
                 <span>{{ category.name }}</span>
             </a>    
         </div>
         
-
         <!--
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">

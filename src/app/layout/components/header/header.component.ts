@@ -95,4 +95,19 @@ export class HeaderComponent implements OnInit {
             this.router.navigate([ this.mainUrl+"/"]);
         }
     }
+
+    ownChannel(){
+        this.router.navigate([this.mainUrl + '/channel/' + this.userId ]);
+        
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
+
+        this.router.events.subscribe((evt) => {
+            if (evt instanceof NavigationEnd) {
+                this.router.navigated = false;
+                window.scrollTo(0, 0);
+            }
+        });
+    }
 }

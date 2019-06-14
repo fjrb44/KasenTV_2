@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
     showMenu: string;
     pushRightClass: string;
     categories: Category[];
+    suscriptions: User[];
     mainUrl: string;
     userid: string;
     username: string;
@@ -51,11 +52,14 @@ export class SidebarComponent implements OnInit {
 
         this.userid = this.ownUserService.getId();
         this.mainUrl = "/user/"+this.userid;
-        this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
         
-        if(this.ownUserService.isLogged){
+        this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
+        this.userService.getSuscribesUsers(Number(this.userid)).subscribe( (data: User[]) => this.suscriptions = data);
+
+        if(this.ownUserService.isLogged()){
             this.userService.getUser(Number(this.userid)).subscribe( (data: User) => this.username = data.username );
         }
+
     }
 
 
@@ -101,8 +105,8 @@ export class SidebarComponent implements OnInit {
         // localStorage.removeItem('isLoggedin');
     }
 
-    changeCategory(id: number){
-        this.router.navigate([this.mainUrl + '/category/' + id ]);
+    changeType(id: number, type: string){
+        this.router.navigate([this.mainUrl + '/'+type+'/' + id ]);
         
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;

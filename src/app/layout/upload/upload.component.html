@@ -1,3 +1,7 @@
-<input type="file" #fileInput style="display:none">
+<form>
+    <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)">
+    <button class="btn btn-success" (click)="fileInput.click()">Upload a video</button>
 
-<button class="btn btn-success" (click)="fileInput.click()">Upload a video</button>
+    <button (click)="onUpload()" type="submit">Enviar</button>
+
+</form>

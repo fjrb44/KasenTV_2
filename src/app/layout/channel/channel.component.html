@@ -2,19 +2,20 @@
   <img *ngIf="user" class="img-thumbnail col-12" src="{{ user.banner }}" alt="Banner Image">
 
   <div class="row mt-3 mb-3 align-content-center">
-    <div class="col-md-2 col-12">
+    <div class="col-md-2 col-4">
       <img class="img-thumbnail" src="{{ user.logo }}" alt="Logo Image">
     </div>
-    <div class="col-12 col-md-8 mt-1">
+    <div class="col-8 col-md-8 mt-1">
       <h1>{{ user.username }}</h1>
       <h5 class="seguidores" *ngIf="user.followers == 1; else moreFollowers">{{ user.followers }} seguidor</h5>
       <ng-template #moreFollowers>
         <h5 class="seguidores">{{ user.followers }} seguidores</h5>
       </ng-template>
-    </div>
-    <div class="col-12 col-md-2">
+      <app-suscribe-button [channelId]="channelId"></app-suscribe-button>
+    </div><!--
+    <div class="offset-3 col-9 offset-md-0 col-md-2">
       <button class="btn btn-suscribe">Suscribe</button>
-    </div>
+    </div>-->
   </div>
   
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3 col-12">
@@ -23,8 +24,11 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['videos']">Videos</a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a class="nav-link" [routerLink]="['lists']">Lists</a>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['following']">Following</a>
         </li>
       </ul>
   
