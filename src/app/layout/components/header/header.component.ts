@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/user/model/user';
 
 @Component({
     selector: 'app-header',
@@ -13,12 +15,15 @@ export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     public form: FormGroup;
     public mainUrl: string;
+    public userId: string;
+    public username: string;
 
     constructor(
         private translate: TranslateService,
         public router: Router,
         public fb: FormBuilder,
-        private ownUserService: OwnUserService
+        private ownUserService: OwnUserService,
+        private userService: UserService
     ) {
     }
 
@@ -36,9 +41,14 @@ export class HeaderComponent implements OnInit {
         this.form = this.fb.group({
             searchField: new FormControl('', Validators.required)
         });
-
+        
         this.pushRightClass = 'push-right';
-        this.mainUrl = "/user/"+this.ownUserService.getId();
+        this.userId = this.ownUserService.getId();
+        this.mainUrl = "/user/"+this.userId;
+
+        if(this.ownUserService.isLogged()){
+            this.userService.getUser(Number(this.userId)).subscribe((data: User) => this.username = data.username);
+        }
     }
 
     isToggled(): boolean {

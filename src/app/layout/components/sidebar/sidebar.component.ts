@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Category } from 'src/app/shared/models/category';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/user/model/user';
 
 @Component({
     selector: 'app-sidebar',
@@ -17,6 +19,8 @@ export class SidebarComponent implements OnInit {
     pushRightClass: string;
     categories: Category[];
     mainUrl: string;
+    userid: string;
+    username: string;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
@@ -24,7 +28,8 @@ export class SidebarComponent implements OnInit {
         private translate: TranslateService, 
         public router: Router, 
         private categoryService: CategoryService,
-        private ownUserService: OwnUserService
+        private ownUserService: OwnUserService,
+        private userService: UserService
     ) {
     }
 
@@ -44,8 +49,13 @@ export class SidebarComponent implements OnInit {
         this.showMenu = '';
         this.pushRightClass = 'push-right';
 
-        this.mainUrl = "/user/"+this.ownUserService.getId();
+        this.userid = this.ownUserService.getId();
+        this.mainUrl = "/user/"+this.userid;
         this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
+        
+        if(this.ownUserService.isLogged){
+            this.userService.getUser(Number(this.userid)).subscribe( (data: User) => this.username = data.username );
+        }
     }
 
 

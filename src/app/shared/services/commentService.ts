@@ -42,7 +42,6 @@ export class CommentService {
 
 
   getCommentsFromVideo(videoId): Observable<Comment[]> {
-    console.log(this.url + '/videos/' + videoId + '/comments');
     return this.http.get<Comment[]>(this.url + '/videos/' + videoId + '/comments');
   }
 

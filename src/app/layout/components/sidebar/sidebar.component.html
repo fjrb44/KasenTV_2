@@ -51,9 +51,9 @@
         <div class="header-fields">
             <div class="separator"></div>
             
-            <div class="nested-menu">
+            <div class="nested-menu" *ngIf="ownUserService.isLogged()">
                 <a class="list-group-item" (click)="addExpandClass('profile')">
-                    <span><i class="fa fa-user"></i>&nbsp; John Snow</span>
+                    <span><i class="fa fa-user"></i>&nbsp; {{ username }}</span>
                 </a>
                 <li class="nested" [class.expand]="showMenu === 'profile'">
                     <ul class="submenu">
@@ -75,6 +75,11 @@
                         </li>
                     </ul>
                 </li>
+            </div>
+            <div *ngIf="!ownUserService.isLogged()">
+                <a class="list-group-item">
+                    <i class="fa fa-user"></i>&nbsp; Login<b class="caret"></b>
+                </a>
             </div>
 
             <div class="nested-menu">

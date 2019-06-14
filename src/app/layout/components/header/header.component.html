@@ -34,15 +34,15 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item nav-link upload" routerLink="{{ mainUrl }}/upload">
+            <li class="nav-item nav-link upload" routerLink="{{ mainUrl }}/upload" *ngIf="ownUserService.isLogged()">
                 <i class="fa fa-upload"></i>
             </li>
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" ngbDropdown *ngIf="ownUserService.isLogged()">
                 <a class="nav-link" ngbDropdownToggle>
-                    <i class="fa fa-user"></i> John Snow <b class="caret"></b>
+                    <i class="fa fa-user"></i> {{ username }}<b class="caret"></b>
                 </a>
-                <div class="dropdown-menu-right" ngbDropdownMenu>
-                    <a class="dropdown-item" routerLink="{{ mainUrl }}/channel">
+                <div class="dropdown-menu-right settings" ngbDropdownMenu>
+                    <a class="dropdown-item" routerLink="{{ mainUrl }}/channel/{{ userId }}">
                         <i class="fa fa-fw fa-user"></i> {{ 'My channel' | translate }}
                     </a>
                     <a class="dropdown-item" routerLink="{{ mainUrl }}/account">
@@ -53,6 +53,11 @@
                         <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
                     </a>
                 </div>
+            </li>
+            <li *ngIf="!ownUserService.isLogged()">
+                <a class="nav-link">
+                    <i class="fa fa-user"></i> Login<b class="caret"></b>
+                </a>
             </li>
         </ul>
     </div>

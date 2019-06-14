@@ -10,6 +10,37 @@
     }
 }
 
+.channel{
+    outline: none;
+    
+    .username{
+        text-align: center;
+    }
+
+    >div{
+        overflow: hidden;
+        border-radius: 50%;
+
+        img{
+            width: 100%;
+            transition: all .2s;
+            transform: scale(1);
+            border-radius: 50%;
+        }
+    }
+
+    &:hover{
+        >div{
+            img{
+                transform: scale(1.1);
+            }
+        }
+        p{
+            color: orange;
+        }
+    }
+}
+
 img{
     border-radius: 100px;
 }

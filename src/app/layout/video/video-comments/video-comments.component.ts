@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from 'src/app/shared/models/comment';
 import { CommentService } from 'src/app/shared/services/commentService';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-video-comments',
@@ -12,10 +13,13 @@ export class VideoCommentsComponent implements OnInit {
   @Input("videoId") videoId: number;
   comments: Comment[];
   public form: FormGroup;
+  userId: string;
 
-  constructor( private commentService: CommentService, public fb: FormBuilder ) { }
+  constructor( private commentService: CommentService, public fb: FormBuilder, private ownUserService: OwnUserService ) { }
 
   ngOnInit() {
+    this.userId = this.ownUserService.getId();
+
     this.loadComments();
     this.form = this.fb.group({
       text: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])
@@ -33,7 +37,8 @@ export class VideoCommentsComponent implements OnInit {
       }, (error) =>{
         console.log(error);
       });
-
+      
+    this.form.reset();
   }
 
   get text(){

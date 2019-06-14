@@ -26,12 +26,11 @@
 
 <div *ngIf="videoId">
   <div class="row mt-2 comment" *ngFor="let comment of comments">
-    <div class="col-3 col-lg-2 offset-lg-1">
-      <img class="img-thumbnail" src="http://placehold.it/100x100" alt="Logo Image">
+    <div class="col-3 col-lg-1 offset-lg-1 channel" routerLink="/user/{{ userId }}/channel/{{ comment.userId }}">
+      <div><img class="img-thumbnail" src="{{comment.logo}}" alt="Logo Image"></div>
+      <p class="username">{{comment.username}}</p>
     </div>
     <div class="col-9 col-lg-9">
-      {{ comment | json }}
-      <h4>{{comment.user}}</h4>
       <p>{{comment.text}}</p>
       <!--
       <p>
