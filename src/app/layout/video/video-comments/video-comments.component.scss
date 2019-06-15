@@ -19,13 +19,15 @@
 
     >div{
         overflow: hidden;
-        border-radius: 50%;
-
+        border-radius: 100%;
+        max-width: 50px;
+        margin: 0 auto;
         img{
             width: 100%;
             transition: all .2s;
             transform: scale(1);
             border-radius: 50%;
+            max-width: 50px;
         }
     }
 

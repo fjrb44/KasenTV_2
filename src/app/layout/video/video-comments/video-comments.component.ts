@@ -40,7 +40,7 @@ export class VideoCommentsComponent implements OnInit {
   }
 
   onCommentUserVideo() {
-    this.commentService.addComment( this.text.value )
+    this.commentService.addComment( this.text.value, this.userId )
       .subscribe( (data: any) => {
         this.loadComments();
       }, (error) =>{
