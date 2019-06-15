@@ -8,7 +8,6 @@ import { Video } from '../model/video';
 })
 export class VideosComponent implements OnInit {
   @Input("videos") public videos: Video[];
-  // @Input("col") public col: string;
   @Input("oneColumn") public oneColumn: boolean;
   @Input("hideUser") public hideUser: boolean;
 

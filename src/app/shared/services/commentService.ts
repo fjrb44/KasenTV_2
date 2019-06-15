@@ -17,10 +17,11 @@ export class CommentService {
   }
 
 
-  addComment(comment: string): Observable<Comment> {
-    if(!this.ownUserService.isLogged()){
+  addComment(comment: string, userId: number): Observable<Comment> {
+    if(userId == 0){
       return;
     }
+    
     let videoId = this.ownUserService.getActualVideo();
 
     if(!videoId){

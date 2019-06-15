@@ -30,11 +30,7 @@ export class ChannelComponent implements OnInit {
 
     this.channelId = Number(url);
 
-    if(this.ownUserService.isLogged()){
-      this.userId = Number(this.ownUserService.getId());
-    }else{
-      this.userId = 0;
-    }
+    this.userId = Number(this.ownUserService.getId());
 
     this.form = this.fb.group({
       searchUserField: new FormControl('', Validators.required)
@@ -45,10 +41,9 @@ export class ChannelComponent implements OnInit {
 
   searchUserVideo() {
     let search = this.form.get("searchUserField").value;
-    let userId = this.ownUserService.getId();
 
     if(search){
-      this.router.navigate(["/user/"+ userId +"/channel/"+this.channelId+"/search/"+ search]);
+      this.router.navigate(["/channel/"+this.channelId+"/search/"+ search]);
     
       this.router.routeReuseStrategy.shouldReuseRoute = function () {
         return false;
@@ -61,7 +56,7 @@ export class ChannelComponent implements OnInit {
           }
       });
     }else{
-      this.router.navigate(["/user"+ userId +"/videos"]);
+      this.router.navigate(["/videos"]);
     }
     
   }

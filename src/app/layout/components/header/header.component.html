@@ -34,10 +34,11 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item nav-link upload" routerLink="{{ mainUrl }}/upload" *ngIf="ownUserService.isLogged()">
+            <li class="nav-item nav-link upload" routerLink="{{ mainUrl }}/upload" *ngIf="loggedIn">
                 <i class="fa fa-upload"></i>
             </li>
-            <li class="nav-item dropdown" ngbDropdown *ngIf="ownUserService.isLogged()">
+
+            <li class="nav-item dropdown" ngbDropdown *ngIf="loggedIn">
                 <a class="nav-link" ngbDropdownToggle>
                     <i class="fa fa-user"></i> {{ username }}<b class="caret"></b>
                 </a>
@@ -55,8 +56,8 @@
                     </a>
                 </div>
             </li>
-            <li *ngIf="!ownUserService.isLogged()">
-                <a class="nav-link">
+            <li *ngIf="!loggedIn">
+                <a class="nav-link" routerLink="/login">
                     <i class="fa fa-user"></i> Login<b class="caret"></b>
                 </a>
             </li>

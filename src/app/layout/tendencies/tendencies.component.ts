@@ -15,7 +15,6 @@ export class TendenciesComponent implements OnInit {
   constructor( private videoService: VideoService) { }
 
   ngOnInit() {
-    //this.videos = this.videoService.getTendencies();
     this.videoService.getTendencies().subscribe((data: Video[]) => this.videos = data);
   }
 }

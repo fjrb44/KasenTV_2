@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OwnUserService {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private tokenService: TokenService) { }
 
-  getId(): string{
-    let userId = this.getUrlData();
-
-    if(userId != "noLogged"){
-      return userId;
+  getId(): number{
+    if(this.tokenService.isValid()){
+      return Number(this.tokenService.getId());
     }
-    return "noLogged";
-  }
-
-  isLogged(): boolean{
-    let userId = this.getUrlData();
-    return userId != "noLogged";
+    return 0;
   }
 
   private getUrlData(): string{

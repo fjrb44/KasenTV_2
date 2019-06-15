@@ -34,17 +34,11 @@ export class UploadComponent implements OnInit {
       text: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])
     });
 
-    if(this.ownUserService.isLogged()){
-      this.userId = Number(this.ownUserService.getId());
-    }else{
-      this.userId = 0;
-    }
+    this.userId = Number(this.ownUserService.getId());
   }
 
   onVideoSelected(event){
     this.video = <File>event.target.files[0];
-
-    console.log(event.target.files[0]);
   }
 
   onImageSelected(event){
@@ -52,10 +46,15 @@ export class UploadComponent implements OnInit {
   }
 
   onUpload() {
-    // const fd = new FormData;
-    // fd.append('video', this.video);
-    // fd.append('image', this.image);
+    var fd = new FormData;
 
+    fd.append('url', this.video);
+    fd.append('imageUrl', this.image);
+    fd.append('title', 'Hola mundo');
+    fd.append('description', 'Hola mundo, este es el primer video');
+    fd.append('userId', '1');
+    fd.append('categoryId', '1');
+    /*
     let fd = {
       'description': "aasdf",
       "url": this.video,
@@ -64,8 +63,11 @@ export class UploadComponent implements OnInit {
       "userId": "1",
       "categoryId": "1"
     }
+    */
+    // var options = { content: fd };
+    
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     });
 
     this.http.post('http://localhost:8000/api/user/'+this.userId+'/newVideo', fd, {

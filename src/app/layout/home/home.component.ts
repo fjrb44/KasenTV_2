@@ -10,17 +10,17 @@ import { OwnUserService } from 'src/app/shared/services/own-user.service';
 })
 export class HomeComponent implements OnInit {
   videos: Video[];
-  userId: string;
-  constructor(private videoService: VideoService, private ownUserService: OwnUserService) { }
+  userId: number;
+  
+  constructor(
+    private videoService: VideoService, 
+    private ownUserService: OwnUserService
+  ) { }
 
   ngOnInit() {
-    this.userId = "0";
+    this.userId = this.ownUserService.getId();
     
-    if(this.ownUserService.isLogged()){
-      this.userId = this.ownUserService.getId();
-    }
-    //this.videos = this.videoService.getHomeVideos();
-    this.videoService.getHomeVideos(Number(this.userId)).subscribe( (data: Video[]) => ( this.videos = data ) );    
+    this.videoService.getHomeVideos(this.userId).subscribe( (data: Video[]) => ( this.videos = data ) );    
   }
 
 }

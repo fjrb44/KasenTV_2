@@ -5,6 +5,8 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/user/model/user';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { TokenService } from 'src/app/shared/services/token.service';
 
 @Component({
     selector: 'app-header',
@@ -15,15 +17,18 @@ export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     public form: FormGroup;
     public mainUrl: string;
-    public userId: string;
+    public userId: number;
     public username: string;
+    public loggedIn: boolean;
 
     constructor(
         private translate: TranslateService,
         public router: Router,
         public fb: FormBuilder,
         private ownUserService: OwnUserService,
-        private userService: UserService
+        private userService: UserService,
+        private authService: AuthService,
+        private tokenService: TokenService
     ) {
     }
 
@@ -44,11 +49,11 @@ export class HeaderComponent implements OnInit {
         
         this.pushRightClass = 'push-right';
         this.userId = this.ownUserService.getId();
-        this.mainUrl = "/user/"+this.userId;
-
-        if(this.ownUserService.isLogged()){
-            this.userService.getUser(Number(this.userId)).subscribe((data: User) => this.username = data.username);
-        }
+        this.mainUrl = "/";
+        
+        this.username = this.tokenService.getUsername();
+        
+        this.authService.authStatus.subscribe( data => {this.loggedIn = data});
     }
 
     isToggled(): boolean {

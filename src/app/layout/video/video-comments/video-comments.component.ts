@@ -3,6 +3,7 @@ import { Comment } from 'src/app/shared/models/comment';
 import { CommentService } from 'src/app/shared/services/commentService';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-video-comments',
@@ -13,11 +14,19 @@ export class VideoCommentsComponent implements OnInit {
   @Input("videoId") videoId: number;
   comments: Comment[];
   public form: FormGroup;
-  userId: string;
+  public userId: number;
+  public isLogged: boolean;
 
-  constructor( private commentService: CommentService, public fb: FormBuilder, private ownUserService: OwnUserService ) { }
+  constructor( 
+    private commentService: CommentService, 
+    public fb: FormBuilder, 
+    private ownUserService: OwnUserService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.authStatus.subscribe( (data: boolean) => this.isLogged = data);
+    
     this.userId = this.ownUserService.getId();
 
     this.loadComments();
@@ -32,7 +41,7 @@ export class VideoCommentsComponent implements OnInit {
 
   onCommentUserVideo() {
     this.commentService.addComment( this.text.value )
-      .subscribe( (receivedComment: any) => {
+      .subscribe( (data: any) => {
         this.loadComments();
       }, (error) =>{
         console.log(error);

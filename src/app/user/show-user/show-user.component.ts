@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../model/user';
-import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -14,7 +13,7 @@ export class ShowUserComponent implements OnInit {
   url: string;
   showMessage: boolean;
   
-  constructor(private ownUserService: OwnUserService, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if(!this.message){
@@ -23,7 +22,7 @@ export class ShowUserComponent implements OnInit {
       this.showMessage = true;
     }
 
-    this.url = "/user/"+this.ownUserService.getId()+"/channel/";
+    this.url = "/channel/";
   }
 
   areSomeUsers(): boolean{

@@ -6,6 +6,8 @@ import { CategoryService } from 'src/app/shared/services/category.service';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/user/model/user';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { TokenService } from 'src/app/shared/services/token.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -20,8 +22,10 @@ export class SidebarComponent implements OnInit {
     categories: Category[];
     suscriptions: User[];
     mainUrl: string;
-    userid: string;
+    userId: number;
     username: string;
+    public loggedIn: boolean;
+
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
@@ -30,7 +34,9 @@ export class SidebarComponent implements OnInit {
         public router: Router, 
         private categoryService: CategoryService,
         private ownUserService: OwnUserService,
-        private userService: UserService
+        private userService: UserService,
+        private authService: AuthService,
+        private tokenService: TokenService
     ) {
     }
 
@@ -50,15 +56,15 @@ export class SidebarComponent implements OnInit {
         this.showMenu = '';
         this.pushRightClass = 'push-right';
 
-        this.userid = this.ownUserService.getId();
-        this.mainUrl = "/user/"+this.userid;
+        this.userId = this.ownUserService.getId();
+        this.mainUrl = "/";
+
+        this.username = this.tokenService.getUsername();
         
         this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
-        this.userService.getSuscribesUsers(Number(this.userid)).subscribe( (data: User[]) => this.suscriptions = data);
+        this.userService.getSuscribesUsers(Number(this.userId)).subscribe( (data: User[]) => this.suscriptions = data);
 
-        if(this.ownUserService.isLogged()){
-            this.userService.getUser(Number(this.userid)).subscribe( (data: User) => this.username = data.username );
-        }
+        this.authService.authStatus.subscribe( (data: boolean) => this.loggedIn = data);
 
     }
 

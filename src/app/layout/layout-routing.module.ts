@@ -5,7 +5,7 @@ import { AuthGuard } from '../shared';
 import {} from "./category/category.module";
 
 // Variable en la cual se guardara el id del usuario que esta usando la app.
-var x = 1;
+// var x = 1;
 
 const routes: Routes = [
     {
@@ -15,7 +15,7 @@ const routes: Routes = [
             { path: '', redirectTo:'home', pathMatch: 'prefix' }, // <-- Redireccion hacia la pagina home
             { path: 'home', loadChildren: './home/home.module#HomeModule' }, // <--- Muestra la pagina home
             { path: 'tendencies', loadChildren: './tendencies/tendencies.module#TendenciesModule'}, // <--- Muestra la pagina con las tendencias
-            { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
+            // { path: 'channel', redirectTo: 'channel/'+x, pathMatch: 'prefix'/*, canActivate: [AuthGuard]*/}, // <-- Redireccion a account con el id del usuario
             { path: 'channel/:channelId', loadChildren: './channel/channel.module#ChannelModule'}, // <--- Muestra la cuenta con el id seleccionado
             { path: 'account', loadChildren: ''}, // <--- Muestra la cuenta del usuario
             { path: 'video/:id', loadChildren: './video/video.module#VideoModule'}, // <--- Muestra el video seleccionado

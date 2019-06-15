@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from '../../model/video';
-import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-video-thumb-nail',
@@ -9,12 +8,9 @@ import { OwnUserService } from 'src/app/shared/services/own-user.service';
 })
 export class VideoThumbNailComponent implements OnInit {
   @Input("video") public video: Video;
-  userId: string;
 
-  constructor(private ownUserService: OwnUserService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.userId = this.ownUserService.getId();
-  }
+  ngOnInit() {}
 
 }
