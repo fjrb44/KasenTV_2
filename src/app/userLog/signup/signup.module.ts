@@ -7,6 +7,7 @@ import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { LogHeaderModule } from 'src/app/shared/component/log-header/log-header.module';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
         TranslateModule,
         NgbDropdownModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        LogHeaderModule
     ],
     declarations: [
         SignupComponent 

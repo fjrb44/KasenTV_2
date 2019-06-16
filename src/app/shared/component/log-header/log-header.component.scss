@@ -1,0 +1,41 @@
+$topnav-background-color: rgb(107, 204, 112);
+$topnav-text-color: rgb(0, 0, 0);
+$topnav-text-color-hover: rgb(43, 43, 43);
+$navbar-brand: orange;
+
+:host {
+    .navbar {
+        background-color: $topnav-background-color;
+        .navbar-brand {
+            color: $navbar-brand;
+            font-weight: bold;
+            border-radius: 100px;
+            padding: 0 10px;
+            background-color: greenyellow;
+        }
+        
+        .mobile{
+            display: none;
+        }
+
+        .nav-item > a {
+            color: $topnav-text-color;
+            &:hover {
+                color: $topnav-text-color-hover;
+            }
+        }
+        
+        .navbar-toggler{
+            outline: none;
+        }
+
+        @media (max-width: 390px){
+            .navbar-brand{
+                display: none;
+            }
+            .mobile{
+                display: inline-block;
+            }
+        }
+    }
+}

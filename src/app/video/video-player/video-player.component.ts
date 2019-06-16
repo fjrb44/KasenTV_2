@@ -11,7 +11,7 @@ import { OwnUserService } from 'src/app/shared/services/own-user.service';
 export class VideoPlayerComponent implements OnInit {
   @Input("video") video: Video;
   url: string;
-  userId: string;
+  userId: number;
   name: string;
 
   constructor(
