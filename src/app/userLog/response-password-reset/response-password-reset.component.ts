@@ -17,43 +17,54 @@ export class ResponsePasswordResetComponent implements OnInit {
     password_confirmation: null,
     resetToken: null
   }
+  public wait = null;
+
+
   constructor(
     private route: ActivatedRoute,
     private jarwisService: JarwisService,
     private router: Router,
-    private Notify: SnotifyService
+    private notify: SnotifyService
   ) {
-  }
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    route.queryParams.subscribe(params => {
       this.form.resetToken = params['token']
     });
   }
+
+  ngOnInit() {
+  }
+
   onSubmit() {
+    this.wait = this.notify.info('Wait...' ,{timeout:5000})
+    this.error = null;
+
     this.jarwisService.changePassword(this.form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     )
   }
 
-  handleResponse(data) {
+  handleResponse(data){
     let _router = this.router;
-    this.Notify.confirm('Done!, Now login with new Password', {
-      buttons: [
-        {
-          text: 'Okay',
-          action: toster => {
-            _router.navigateByUrl('/login'),
-              this.Notify.remove(toster.id)
-          }
-        },
+
+    this.notify.remove(this.wait.id);
+    this.notify.confirm('Done!, Now login with new Password', {
+      buttons:[
+        {text: 'Okay', action: toster =>{
+          _router.navigateByUrl('/login'),
+          this.notify.remove(toster.id)
+        }},
       ]
     });
   }
 
-  handleError(error) {
-    this.error = error.error.errors;
-    console.log(this.error);
+  handleError(error){
+
+    this.notify.remove(this.wait.id);
+    if(error.error.error){
+      this.notify.error(error.error.error);
+    }else if(error.error.errors){
+      this.error = error.error.errors;
+    }
   }
 }

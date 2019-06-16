@@ -13,9 +13,27 @@ import { LoaderModule } from 'src/app/shared/component/loader/loader.module';
 import { FollowingComponent } from './following/following.component';
 import { ShowUserModule } from 'src/app/user/show-user/show-user.module';
 import { SuscribeButtonModule } from 'src/app/shared/component/suscribe-button/suscribe-button.module';
+import { SnotifyService, ToastDefaults, SnotifyModule } from 'ng-snotify';
 
 @NgModule({
-    imports: [CommonModule, ChannelRoutingModule, PageHeaderModule, VideosModule, ReactiveFormsModule, LoaderModule, ShowUserModule, SuscribeButtonModule],
-    declarations: [ChannelComponent, ChannelVideosComponent, VideoListComponent, ChannelSearchComponent, FollowingComponent]
+    imports: [
+        CommonModule, 
+        ChannelRoutingModule, 
+        PageHeaderModule, 
+        VideosModule, 
+        ReactiveFormsModule, 
+        LoaderModule, 
+        ShowUserModule, 
+        SuscribeButtonModule,
+        SnotifyModule
+    ],
+    declarations: [
+        ChannelComponent, 
+        ChannelVideosComponent, 
+        VideoListComponent, 
+        ChannelSearchComponent, 
+        FollowingComponent
+    ],
+    providers: [ {provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService]
 })
 export class ChannelModule {}

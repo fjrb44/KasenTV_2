@@ -82,7 +82,7 @@
                         -->
                         <li>
                             <!--<a [routerLink]="['/home']" (click)="onLoggedout()">-->
-                            <a (click)="onLoggedout()">
+                            <a (click)="onLoggedout()" class="pointer">
                                 <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
                             </a>
                         </li>
@@ -90,7 +90,7 @@
                 </li>
             </div>
             <div *ngIf="!loggedIn">
-                <a class="list-group-item">
+                <a class="list-group-item pointer" routerLink="/login">
                     <i class="fa fa-user"></i>&nbsp; Login<b class="caret"></b>
                 </a>
             </div>

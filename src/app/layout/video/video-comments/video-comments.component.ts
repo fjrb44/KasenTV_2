@@ -4,6 +4,7 @@ import { CommentService } from 'src/app/shared/services/commentService';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-video-comments',
@@ -16,12 +17,14 @@ export class VideoCommentsComponent implements OnInit {
   public form: FormGroup;
   public userId: number;
   public isLogged: boolean;
+  public wait;
 
   constructor( 
     private commentService: CommentService, 
     public fb: FormBuilder, 
     private ownUserService: OwnUserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notify: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -40,10 +43,16 @@ export class VideoCommentsComponent implements OnInit {
   }
 
   onCommentUserVideo() {
+    this.wait = this.notify.info('Wait...', {timeout: 5000});
+
     this.commentService.addComment( this.text.value, this.userId )
       .subscribe( (data: any) => {
+        this.notify.remove(this.wait.id);
+        this.notify.success("Your comment has succesfully upload.");
         this.loadComments();
       }, (error) =>{
+        this.notify.remove(this.wait.id);
+        this.notify.error('There was an error');
         console.log(error);
       });
       

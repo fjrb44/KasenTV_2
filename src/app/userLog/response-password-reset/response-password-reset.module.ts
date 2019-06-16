@@ -26,6 +26,6 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     declarations: [
         ResponsePasswordResetComponent
     ],
-    providers: [ {provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
+    providers: [ {provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService]
 })
 export class ResponsePasswordResetModule {}

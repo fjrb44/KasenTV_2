@@ -9,6 +9,7 @@ import { VideoCommentsComponent } from './video-comments/video-comments.componen
 import { VideosModule } from 'src/app/video/videos/videos.module';
 import { VideoPlayerModule } from 'src/app/video/video-player/video-player.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SnotifyService, ToastDefaults, SnotifyModule } from 'ng-snotify';
 
 @NgModule({
     imports: [
@@ -18,9 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       VideosModule,
       VideoPlayerModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      SnotifyModule
     ],
-    declarations: [VideoComponent, VideoCommentsComponent]
-    // declarations: [VideoComponent, VideoPlayerComponent, VideoCommentsComponent, VideoFormCommentComponent]
+    declarations: [VideoComponent, VideoCommentsComponent],
+    providers: [ {provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService]
 })
 export class VideoModule {}

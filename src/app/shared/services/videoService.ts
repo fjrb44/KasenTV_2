@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Video } from '../../video/model/video';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -53,5 +53,18 @@ export class VideoService {
 
     getCategoryVideos(categoryId: number){
         return this.http.get<Video[]>(this.url+"category/"+categoryId+"/videos");
+    }
+
+    postNewVideo(userId, data){
+        console.log(data);
+        const headers = new HttpHeaders({
+            'Content-Type': 'multipart/form-data'
+        });
+        
+        return this.http.post('http://localhost:8000/api/user/'+userId+'/newVideo', data, {
+            headers: headers,
+            reportProgress: true,
+            observe: 'events'
+        });
     }
 }

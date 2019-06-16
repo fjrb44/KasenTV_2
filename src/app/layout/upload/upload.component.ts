@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/models/category';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
+import { VideoService } from 'src/app/shared/services/videoService';
 
 @Component({
   selector: 'app-upload',
@@ -17,11 +18,21 @@ export class UploadComponent implements OnInit {
   categories: Category[];
   userId: number;
 
+  form2 = {
+    url: null,
+    imageUrl: null,
+    description: null,
+    title: null,
+    userId: null,
+    categoryId: null
+  }
+
   constructor(
     private http: HttpClient, 
     private fb: FormBuilder,
     private categoryService: CategoryService,
-    private ownUserService: OwnUserService
+    private ownUserService: OwnUserService,
+    private videoService: VideoService
   ) { }
 
   ngOnInit() {
@@ -47,40 +58,30 @@ export class UploadComponent implements OnInit {
 
   onUpload() {
     var fd = new FormData;
-
+    /*
     fd.append('url', this.video);
     fd.append('imageUrl', this.image);
     fd.append('title', 'Hola mundo');
     fd.append('description', 'Hola mundo, este es el primer video');
     fd.append('userId', '1');
     fd.append('categoryId', '1');
-    /*
-    let fd = {
-      'description': "aasdf",
-      "url": this.video,
-      "imageUrl": this.image,
-      "title": "Asdfg",
-      "userId": "1",
-      "categoryId": "1"
-    }
     */
-    // var options = { content: fd };
-    
-    const headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
-    });
 
-    this.http.post('http://localhost:8000/api/user/'+this.userId+'/newVideo', fd, {
-      headers: headers,
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(event => {
+    this.form2.url = this.video;
+    this.form2.imageUrl = this.image;
+    this.form2.title = "Prueba grande y fuerte";
+    this.form2.description = "Otra descripcion de mierda";
+    this.form2.userId = this.userId;
+    this.form2.categoryId = 1;
+
+    this.videoService.postNewVideo(this.userId, this.form2).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         console.log('Upload progress: ' + Math.round(event.loaded / event.total * 100) + '%');
       } else if (event.type === HttpEventType.Response) {
         console.log(event);
       }
-    });
+    }, error => console.log(error));
+    
   }
 }
 

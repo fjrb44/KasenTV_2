@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OwnUserService } from '../../services/own-user.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-suscribe-button',
@@ -14,11 +15,15 @@ export class SuscribeButtonComponent implements OnInit {
   showButton: boolean;
   isSuscribe: boolean;
   isLoggedIn: boolean;
+  private wait;
+  private success;
+  private error;
 
   constructor( 
     private ownUserService: OwnUserService, 
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notify: SnotifyService
   ) { }
 
   ngOnInit() {
@@ -55,15 +60,41 @@ export class SuscribeButtonComponent implements OnInit {
   }
 
   suscribe(){
-    // Añadir un modal en el futuro
-    this.userService.suscribe(this.userId, this.channelId).subscribe((data) => console.log(data));
+    this.wait = this.notify.info("Wait...", {timeout: 2000});
+
+    this.userService.suscribe(this.userId, this.channelId).subscribe((data) => {
+      this.removePreviousMessage();
+      this.success = this.notify.success("You have succesfully suscribed");
+    }, error =>{
+      this.removePreviousMessage();
+      this.error = this.notify.error("It was an unnespected error, reload the page and try it again");
+    });
     this.isSuscribe = false;
   }
 
   unsuscribe(){
-    // Añadir un modal en el futuro
-    this.userService.unsuscribe(this.userId, this.channelId).subscribe((data) => console.log(data));
+    this.wait = this.notify.info("Wait...", {timeout: 2000});
+
+    this.userService.unsuscribe(this.userId, this.channelId).subscribe((data) => {
+      this.removePreviousMessage();
+      this.success = this.notify.success("You have succesfully unsuscribed");
+    }, error => {
+      this.removePreviousMessage();
+      this.error = this.notify.error("It was an unnespected error, reload the page and try it again");
+    });
     this.isSuscribe = true;
+  }
+
+  removePreviousMessage(){
+    if(this.wait){
+      this.notify.remove(this.wait.id);
+    }
+    if(this.success){
+      this.notify.remove(this.success.id);
+    }
+    if(this.error){
+      this.notify.remove(this.error.id);
+    }
   }
 
 }

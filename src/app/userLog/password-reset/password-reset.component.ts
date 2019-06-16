@@ -11,36 +11,30 @@ export class PasswordResetComponent implements OnInit {
   public form = {
     email: null
   };
+  private wait = null;
 
   constructor(
     private jarvisService: JarwisService,
     private notify: SnotifyService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit() {
-    this.jarvisService.sendPasswordResetLink(this.form).subscribe( 
-      (data) => this.handleResponse(data),
-      (error) => this.notify.error(error.error.error)
-    );
-    /*
-    this.Notfiy.info('Wait...' ,{timeout:5000})
+    this.wait = this.notify.info('Wait...' ,{timeout:5000})
     this.jarvisService.sendPasswordResetLink(this.form).subscribe(
       data => this.handleResponse(data),
-      error => this.notify.error(error.error.error)
+      error => {
+        this.notify.remove(this.wait.id);
+        this.notify.error(error.error.error);
+      }
     );
-    */
   }
 
   handleResponse(res) {
-    console.log(res);
+    this.notify.remove(this.wait.id);
+    this.notify.success(res.data,{timeout:0});
     this.form.email = null;
-    /*
-    this.Notfiy.success(res.data,{timeout:0});
-    this.form.email = null;
-    */
   }
 
 }
