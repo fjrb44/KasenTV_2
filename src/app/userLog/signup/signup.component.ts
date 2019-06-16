@@ -15,7 +15,8 @@ export class SignupComponent implements OnInit {
     email: null,
     username: null,
     password: null,
-    password_confirmation: null
+    password_confirmation: null,
+    logo: null
   };
   
   public error = [];
@@ -52,5 +53,9 @@ export class SignupComponent implements OnInit {
 
   handleError(error){
     this.error = error.error.errors;
+  }
+
+  onImageSelected(event){
+    this.form.logo = <File>event.target.files[0];
   }
 }
