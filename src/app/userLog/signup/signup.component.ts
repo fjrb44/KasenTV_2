@@ -35,13 +35,22 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     console.log(this.form);
 
-    this.jarwisService.signup(this.form).subscribe(
+    let fd = new FormData;
+
+    fd.append('email', this.form.email);
+    fd.append('username', this.form.username);
+    fd.append('password', this.form.password);
+    fd.append('password_confirmation', this.form.password_confirmation);
+    fd.append('logo', this.form.logo);
+
+    this.jarwisService.signup(fd).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     );
   }
 
   handleResponse(data){
+
     this.tokenService.handle(data.access_token);
     this.tokenService.setUsername(data.username);
     this.tokenService.setId(data.id);
@@ -49,6 +58,7 @@ export class SignupComponent implements OnInit {
     this.authService.changeStatus(true);
     
     this.router.navigateByUrl("/");
+    
   }
 
   handleError(error){

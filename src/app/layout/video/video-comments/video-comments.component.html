@@ -26,7 +26,7 @@
 
 <div *ngIf="videoId">
   <div class="row mt-2 comment" *ngFor="let comment of comments">
-    <div class="col-3 col-lg-2 offset-lg-1 channel" routerLink="/user/{{ userId }}/channel/{{ comment.userId }}">
+    <div class="col-3 col-lg-2 offset-lg-1 channel" routerLink="/channel/{{ comment.userId }}">
       <div><img class="img-thumbnail" src="{{comment.logo}}" alt="Logo Image"></div>
       <p class="username">{{comment.username}}</p>
     </div>

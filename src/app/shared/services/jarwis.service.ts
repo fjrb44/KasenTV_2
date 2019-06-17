@@ -9,7 +9,6 @@ export class JarwisService {
 
   constructor(private http: HttpClient) { 
     this.url = "http://localhost:8000/api/";
-    
   }
 
   signup(data){
@@ -25,7 +24,6 @@ export class JarwisService {
   }
 
   changePassword(data){
-    console.log(data);
     return this.http.post(this.url+'resetPassword', data);
   }
 }
