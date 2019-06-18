@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit {
     userId: number;
     username: string;
     public loggedIn: boolean;
+    private publicUrl: string;
 
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
@@ -41,6 +42,8 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.publicUrl = "http://localhost:8000/storage/";
+        
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&

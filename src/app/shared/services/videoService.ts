@@ -55,24 +55,14 @@ export class VideoService {
         return this.http.get<Video[]>(this.url+"category/"+categoryId+"/videos");
     }
 
-    postNewVideo(userId, url, imageUrl, description, title, categoryId){
-
-        const headers = new HttpHeaders({
-            'Content-Type': 'multipart/form-data'
-        });
-        var dataUpload = {
-            "url": url,
-            "imageUrl": imageUrl,
-            "description": description,
-            "title": title,
-            "userId": userId,
-            "categoryId": categoryId
-        };
-
-        return this.http.post('http://localhost:8000/api/user/'+userId+'/newVideo', dataUpload, {
-            headers: headers,
+    postNewVideo(userId, data){
+        return this.http.post('http://localhost:8000/api/user/'+userId+'/newVideo', data, {
             reportProgress: true,
             observe: 'events'
         });
+    }
+
+    addWath(userId, videoId){
+        return this.http.post(this.url+'user/'+userId+'/video/'+videoId+'/watch', {});
     }
 }

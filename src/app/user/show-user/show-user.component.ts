@@ -12,10 +12,13 @@ export class ShowUserComponent implements OnInit {
   @Input("message") public message: string;
   url: string;
   showMessage: boolean;
+  public publicUrl: string;
   
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.publicUrl = "http://localhost:8000/storage/";
+    
     if(!this.message){
       this.showMessage = false;
     }else{

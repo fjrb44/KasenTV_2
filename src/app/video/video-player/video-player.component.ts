@@ -13,6 +13,7 @@ export class VideoPlayerComponent implements OnInit {
   url: string;
   userId: number;
   name: string;
+  publicUrl: string;
 
   constructor(
     private router: Router, 
@@ -20,6 +21,7 @@ export class VideoPlayerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.publicUrl = "http://localhost:8000/storage/";
     this.url = "localhost"+this.router.url;
     this.userId = this.ownUserService.getId();
     this.name = "Username";

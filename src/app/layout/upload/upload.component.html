@@ -1,30 +1,110 @@
-<form [formGroup]="form" (submit)="onUpload()">
-    <!--
-    <div *ngIf="video">
-        {{ video || json }}
+<div class="main-container">
+    <div class="row">
+        <!--<div class="progress" *ngIf="percentage">
+            <div 
+                class="progress-bar progress-bar-striped progress-bar-animated" 
+                role="progressbar" 
+                aria-valuenow="{{ percentage }}" 
+                aria-valuemin="0" 
+                aria-valuemax="100"
+            ></div>
+        </div>
+        -->
+        <div class="mt-4 col-8 offset-2">
+            <div class="card">
+                <div class="card-header">Sube tu video aquí</div>
+                <div class="card-body">
+
+                    <form #videoForm=ngForm (ngSubmit)="onSubmit()">
+
+                        <div class="form-group row">
+                            <label for="url" class="col-12 col-form-label">Video</label>
+                            <div class="col-12">
+                                <input 
+                                    name="url" 
+                                    type="file" 
+                                    (change)="onVideoSelected($event)" 
+                                    class="form-control" 
+                                    id="url" 
+                                    placeholder="Logo image" 
+                                    required
+                                >
+                                <div class="alert alert-danger" *ngIf="error.url">
+                                    {{ error.url }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="imageDiv" *ngIf="videoSrc">
+                            <video class="img" src="{{ videoSrc }}"></video>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="imageUrl" class="col-12 col-form-label">Miniatura del video</label>
+                            <div class="col-12">
+                                <input 
+                                    name="imageUrl" 
+                                    type="file" 
+                                    (change)="onImageSelected($event)" 
+                                    class="form-control" 
+                                    id="imageUrl" 
+                                    placeholder="Logo image" 
+                                    required
+                                >
+                                <small>(Tamaño recomendado: 500x250px)</small>
+                                <div class="alert alert-danger" *ngIf="error.imageUrl">
+                                    {{ error.imageUrl }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="imageDiv" *ngIf="imageSrc">
+                            <img class="img" src="{{ imageSrc }}" alt="Your image" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="title" class="col-12 col-form-label">Título del video</label>
+                            <div class="col-12">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Título" [(ngModel)]="form.title" required minlength="4" maxlength="100">
+                                <div class="alert alert-danger" *ngIf="error.title">
+                                    {{ error.title }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-12 col-form-label">Descripcion del video</label>
+                            <div class="col-12">
+                                <textarea name="description" id="description" class="form-control textarea" [(ngModel)]="form.description" maxlength="2000"></textarea>
+                                <div class="alert alert-danger" *ngIf="error.description">
+                                    {{error.description}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="categoryId" class="col-12 col-form-label">Categoria del video</label>
+                            <div class="col-12">
+                                <select name="categoryId" id="categoryId" class="form-control" [(ngModel)]="form.categoryId">
+                                    <option value="0">Sin categoria</option>
+                                    <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+                                </select>
+
+                                <div class="alert alert-danger" *ngIf="error.categoryId">
+                                    {{error.categoryId}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary mt-3 ml-3 mt-sm-0 ml-sm-0"
+                                    [disabled]="!videoForm.valid">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    -->
-    <input name="url" type="file" #videoInput style="display:none" (change)="onVideoSelected($event)">
-    <p class="btn btn-success" (click)="videoInput.click()">Sube un video</p>
-    <!--
-    <div *ngIf="image">
-        {{ image || json }}
-    </div>
-    -->
-    <input name="imageUrl" type="file" #imageInput style="display:none" (change)="onImageSelected($event)">
-    <p class="btn btn-success" (click)="imageInput.click()">Sube una miniatura</p>
-
-    <input type="text" name="tittle">
-
-    <input type="text" name="description">
-    <button type="submit" (click)="a($event)">Enviar</button>
-</form>
-
-<!--
-"description" => ["max:2000"],
-"url" => ["required", "mimes:mp4,mov,ogg"],
-"imageUrl" => ["required", "image", "mimes:jpg,jpeg,png,gif,webp"],
-"title" => ["required","min:4", "max:100"],
-"userId" => ["required", "numeric"],
-"categoryId" =>["numeric"]
--->
+</div>

@@ -78,3 +78,11 @@ $navbar-brand: orange;
         }
     }
 }
+
+.login{
+    color: black;
+
+    &:hover{
+        color: orange;
+    }
+}

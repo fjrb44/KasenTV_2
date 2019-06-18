@@ -3,7 +3,7 @@
     <div *ngFor="let user of users">
       <div class="users" (click)="reload()" routerLink="{{url}}{{user.id}}">
         <div>
-          <img class="img-thumbnail" src="{{ user.logo }}" alt="Logo Image">
+          <img class="img-thumbnail" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
         </div>
         <p>{{ user.username }}</p>
         <p class="seguidores" *ngIf="user.followers == 1; else moreFollowers">{{ user.followers }} seguidor</p>

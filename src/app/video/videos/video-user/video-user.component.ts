@@ -8,9 +8,12 @@ import { Video } from '../../model/video';
 })
 export class VideoUserComponent implements OnInit {
   @Input("video") public video: Video;
-
+  private publicUrl: string;
+  
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.publicUrl = "http://localhost:8000/storage/";
+  }
 
 }

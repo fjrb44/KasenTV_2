@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpEventType } from '@angular/common/http';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/models/category';
 import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { VideoService } from 'src/app/shared/services/videoService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -12,108 +12,95 @@ import { VideoService } from 'src/app/shared/services/videoService';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  video: File;
-  image: File;
-  form: FormGroup;
   categories: Category[];
   userId: number;
 
-  form2 = {
+  public form = {
     url: null,
     imageUrl: null,
     description: null,
     title: null,
     userId: null,
     categoryId: null
-  }
+  };
+
+  public imageSrc;
+  public videoSrc;
+  public error = [];
+  public percentage: number;
 
   constructor(
-    private http: HttpClient, 
-    private fb: FormBuilder,
     private categoryService: CategoryService,
     private ownUserService: OwnUserService,
-    private videoService: VideoService
+    private videoService: VideoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.video = null;
-    this.image = null;
+    this.percentage = 0;
 
     this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
-
-    this.form = this.fb.group({
-      title: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]),
-      descripcion: new FormControl('', [Validators.required]),
-      url: new FormControl(''),
-      imageUrl: new FormControl('')
-    });
-
     this.userId = Number(this.ownUserService.getId());
   }
 
   onVideoSelected(event){
-    // this.video = <File>event.target.files[0];
-    const file = event.target.files[0];
-    this.form.get('url').setValue(file);
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+
+      reader.onload = e => this.videoSrc = reader.result;
+
+      reader.readAsDataURL(file);
+
+      this.form.url = <File>event.target.files[0];
+    }
   }
 
   onImageSelected(event){
-    this.image = <File>event.target.files[0];
-  }
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
 
-  onUpload() {
-    /*
-    var fd = new FormData;
-    
-    fd.append('url', 'asdf');
-    fd.append('imageUrl', 'this.image');
-    fd.append('title', 'Hola mundo');
-    fd.append('description', 'Hola mundo, este es el primer video');
-    fd.append('userId', '1');
-    fd.append('categoryId', '1');
-    */
-    var fd = {
-      'url': 'Null',
-      'imageUrl': 'Null',
-      'description': 'Null',
-      'title': 'Null',
-      'userId': 1,
-      'categoryId': 1
+      const reader = new FileReader();
+
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
+
+      this.form.imageUrl = <File>event.target.files[0];
     }
-
-
-    /*
-    this.form2.url = this.video;
-    this.form2.imageUrl = this.image;
-    this.form2.title = "Prueba grande y fuerte";
-    this.form2.description = "Otra descripcion de mierda";
-    this.form2.userId = this.userId;
-    this.form2.categoryId = 1;
-    */
-
-    console.log(this.form.get('url').value);
-    
-    this.videoService.postNewVideo(this.userId, 'null URL', 'null ImageUrl', 'Null Description', 'Null title', 1).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        console.log('Upload progress: ' + Math.round(event.loaded / event.total * 100) + '%');
-      } else if (event.type === HttpEventType.Response) {
-        console.log(event);
-      }
-    }, error => console.log(error));
   }
 
-  a(event: MouseEvent){
-    event.preventDefault();
+  onSubmit() {
+    var fd = new FormData;
+    this.error = [];
+    
+    fd.append('url', this.form.url);
+    fd.append('imageUrl', this.form.imageUrl);
+    fd.append('title', this.form.title);
+    fd.append('description', this.form.description);
+    fd.append('userId', this.userId+'');
 
-    this.onUpload();
+    if(this.form.categoryId != 0){
+      fd.append('categoryId', this.form.categoryId);
+    }
+    
+    this.videoService.postNewVideo(this.userId, fd).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.percentage = Math.round(event.loaded / event.total * 100);
+      } else if (event.type === HttpEventType.Response) {
+        if(event.body){
+          var data: any = event.body;
+
+          if(data.data.id){
+            this.router.navigateByUrl("/video/"+data.data.id);
+          }
+        }
+      }
+    }, error => this.handleError(error));
+  }
+
+  handleError(error){
+    this.error = error.error.errors;
   }
 }
-
-/*
-"description" => ["max:2000"],
-"url" => ["required", "mimes:mp4,mov,ogg"],
-"imageUrl" => ["required", "image", "mimes:jpg,jpeg,png,gif,webp"],
-"title" => ["required","min:4", "max:100"],
-"userId" => ["required", "numeric"],
-"categoryId" =>["numeric"]
-*/

@@ -1,11 +1,11 @@
 <ng-snotify></ng-snotify>
 
 <div *ngIf="user">
-  <img *ngIf="user" class="img-thumbnail col-12" src="{{ user.banner }}" alt="Banner Image">
+  <img *ngIf="user" class="img-thumbnail col-12" src="{{ publicUrl }}{{ user.banner }}" alt="Banner Image">
 
   <div class="row mt-3 mb-3 align-content-center">
     <div class="col-md-2 col-4">
-      <img class="img-thumbnail" src="{{ user.logo }}" alt="Logo Image">
+      <img class="img-thumbnail" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
     </div>
     <div class="col-8 col-md-8 mt-1">
       <h1>{{ user.username }}</h1>

@@ -17,7 +17,7 @@
                 <div class="separator"></div>
                 <div *ngFor="let suscription of suscriptions">
                     <a (click)="changeType(suscription.id, 'channel')" routerLink="{{ mainUrl }}/channel/{{ suscription.id }}" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                        <div class="divLogo"><img class="logo" src="{{suscription.logo}}" alt="userlogo"></div>&nbsp;
+                        <div class="divLogo"><img class="logo" src="{{ publicUrl }}{{suscription.logo}}" alt="userlogo"></div>&nbsp;
                         <span>{{ suscription.username }}</span>
                     </a> 
                 </div>
@@ -61,6 +61,13 @@
         <!-- Menu superior version movil -->
         <div class="header-fields">
             <div class="separator"></div>
+            
+            <div *ngIf="loggedIn">
+                <a routerLink="/upload"  [routerLinkActive]="['router-link-active']" class="list-group-item">
+                    <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;
+                    <span>Upload</span>
+                </a>
+            </div>
             
             <div class="nested-menu" *ngIf="loggedIn">
                 <a class="list-group-item" (click)="addExpandClass('profile')">

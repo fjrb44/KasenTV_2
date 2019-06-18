@@ -3,6 +3,7 @@ import { Video } from 'src/app/video/model/video';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from 'src/app/shared/services/videoService';
 import { Router, NavigationEnd } from '@angular/router';
+import { OwnUserService } from 'src/app/shared/services/own-user.service';
 
 @Component({
   selector: 'app-video',
@@ -18,12 +19,23 @@ export class VideoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private videoService: VideoService, 
-    private router: Router
+    private router: Router,
+    private ownUserService: OwnUserService
   ) { }
 
   ngOnInit() {
     this.videoId = Number(this.route.snapshot.paramMap.get("id"));
-    this.userId = 1;
+    this.userId = this.ownUserService.getId();
+
+    if(this.userId != 0){
+      this.videoService.addWath(this.userId, this.videoId).subscribe(
+        data => {
+          console.log(data);
+        }, error =>{
+          console.log(error);
+        }
+      );
+    }
 
     this.videoService.getRecomendedVideos(this.videoId, this.userId).subscribe( (data: Video[]) =>{
       this.videos = data;

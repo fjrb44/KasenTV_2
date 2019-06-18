@@ -15,6 +15,7 @@ export class ChannelComponent implements OnInit {
   public form: FormGroup;
   public user: User;
   public userId: number;
+  private publicUrl: string;
 
   constructor(
     public router: Router, 
@@ -24,6 +25,8 @@ export class ChannelComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.publicUrl = "http://localhost:8000/storage/";
+
     let url = this.router.url;
     url = url.substring( url.indexOf('channel')+8, url.length );
     url = url.substring(0, url.indexOf('/'));

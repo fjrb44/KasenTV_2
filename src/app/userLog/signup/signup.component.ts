@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
     password_confirmation: null,
     logo: null
   };
-  
+  public imageSrc;
   public error = [];
 
   constructor(
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form);
+    this.error = [];
 
     let fd = new FormData;
 
@@ -44,21 +44,34 @@ export class SignupComponent implements OnInit {
     fd.append('logo', this.form.logo);
 
     this.jarwisService.signup(fd).subscribe(
-      data => this.handleResponse(data),
+      data => this.login(),
       error => this.handleError(error)
     );
   }
 
+  login(){
+    const form = {
+      email: this.form.email,
+      password: this.form.password
+    };
+  
+    this.jarwisService.login(form).subscribe( (data) =>{
+      this.handleResponse(data);
+    }, (error) => {
+  
+    });
+  }
+
   handleResponse(data){
+    console.log(data);
 
     this.tokenService.handle(data.access_token);
-    this.tokenService.setUsername(data.username);
-    this.tokenService.setId(data.id);
+    this.tokenService.setUsername(data.user);
+    this.tokenService.setId(data.userId);
     
     this.authService.changeStatus(true);
     
     this.router.navigateByUrl("/");
-    
   }
 
   handleError(error){
@@ -66,6 +79,16 @@ export class SignupComponent implements OnInit {
   }
 
   onImageSelected(event){
-    this.form.logo = <File>event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
+
+      this.form.logo = <File>event.target.files[0];
+    }
   }
 }

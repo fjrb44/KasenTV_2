@@ -7,8 +7,7 @@
         <source src="http://techslides.com/demos/sample-videos/small.3gp" type="video/3gp">
         -->
 
-    <source src="{{ video.url }}" type="video/mp4">
-
+    <source src="{{ publicUrl }}{{ video.url }}" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
   <h2>{{video.title}}</h2>
@@ -18,7 +17,7 @@
       <div class="row username" routerLink="/channel/{{ video.userId }}">
         <div class="col-6">
           <div class="imgParent">
-            <img class="img-thumbnail" src="{{ video.userLogo }}" alt="Logo Image">
+            <img class="img-thumbnail" src="{{ publicUrl }}{{ video.userLogo }}" alt="Logo Image">
           </div>
         </div>
         <div class="col-6 channel">
