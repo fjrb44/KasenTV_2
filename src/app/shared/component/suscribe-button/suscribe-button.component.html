@@ -6,3 +6,6 @@
     <button class="btn btn-suscribe" (click)="unsuscribe()">Unsuscribe</button>  
   </div>
 </div>
+<div *ngIf="isEdditable && showEdit">
+  <button class="btn btn-success" routerLink="edit">Editar</button>
+</div>

@@ -38,7 +38,8 @@ export class UploadComponent implements OnInit {
 
   ngOnInit() {
     this.percentage = 0;
-
+    this.form.categoryId = 0;
+    
     this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
     this.userId = Number(this.ownUserService.getId());
   }

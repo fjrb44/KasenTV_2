@@ -56,13 +56,17 @@ export class VideoService {
     }
 
     postNewVideo(userId, data){
-        return this.http.post('http://localhost:8000/api/user/'+userId+'/newVideo', data, {
+        return this.http.post('http://localhost:8000/api/user/newVideo', data, {
             reportProgress: true,
             observe: 'events'
         });
     }
 
     addWath(userId, videoId){
-        return this.http.post(this.url+'user/'+userId+'/video/'+videoId+'/watch', {});
+        return this.http.post(this.url+'user/video/'+videoId+'/watch', {});
+    }
+
+    videoUpdate(data, videoId){
+        return this.http.post(this.url+'video/'+videoId+"/edit", data);
     }
 }

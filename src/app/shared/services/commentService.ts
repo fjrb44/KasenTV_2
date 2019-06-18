@@ -31,14 +31,12 @@ export class CommentService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    
-    var user = this.ownUserService.getId();
 
     var commentUpload: commentUpload = {
       'text': comment
     };
 
-    return this.http.post<Comment>(this.url + '/user/'+user+'/videos/'+videoId+'/newComment', commentUpload, { headers: headers});
+    return this.http.post<Comment>(this.url + '/user/videos/'+videoId+'/newComment', commentUpload, { headers: headers});
   }
 
 

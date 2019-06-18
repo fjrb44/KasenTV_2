@@ -33,10 +33,10 @@ export class UserService {
   }
 
   suscribe(userId: number, channelId: number): Observable<any>{
-    return this.http.post<any>(this.url+"user/"+userId+"/channel/"+channelId+'/suscribe', "", { headers: this.headers});
+    return this.http.post<any>(this.url+"user/channel/"+channelId+'/suscribe', "", { headers: this.headers});
   }
 
   unsuscribe(userId: number, channelId: number): Observable<any>{
-    return this.http.post<any>(this.url+"user/"+userId+"/channel/"+channelId+'/unsuscribe', "", { headers: this.headers});
+    return this.http.post<any>(this.url+"user/channel/"+channelId+'/unsuscribe', "", { headers: this.headers});
   }
 }

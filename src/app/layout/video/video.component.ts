@@ -30,9 +30,9 @@ export class VideoComponent implements OnInit {
     if(this.userId != 0){
       this.videoService.addWath(this.userId, this.videoId).subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
         }, error =>{
-          console.log(error);
+          // console.log(error);
         }
       );
     }

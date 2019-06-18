@@ -90,4 +90,10 @@ export class TokenService {
 
     return false;
   }
+
+  logout(){
+    this.remove();
+    this.removeId();
+    this.removeUsername();
+  }
 }

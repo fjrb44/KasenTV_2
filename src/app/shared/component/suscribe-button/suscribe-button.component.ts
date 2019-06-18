@@ -11,6 +11,7 @@ import { SnotifyService } from 'ng-snotify';
 })
 export class SuscribeButtonComponent implements OnInit {
   @Input("channelId") private channelId: number;
+  @Input("showEdit") private showEdit: boolean;
   userId: number;
   showButton: boolean;
   isSuscribe: boolean;
@@ -18,6 +19,7 @@ export class SuscribeButtonComponent implements OnInit {
   private wait;
   private success;
   private error;
+  private isEdditable: boolean;
 
   constructor( 
     private ownUserService: OwnUserService, 
@@ -28,6 +30,12 @@ export class SuscribeButtonComponent implements OnInit {
 
   ngOnInit() {
     this.isSuscribe = true;
+    this.isEdditable = false;
+    
+    if(!this.showEdit){
+      this.showEdit = false;
+    }
+
     this.userId = Number(this.ownUserService.getId());
 
     this.authService.authStatus.subscribe( (data: boolean) => {
@@ -36,7 +44,7 @@ export class SuscribeButtonComponent implements OnInit {
       if(this.isLoggedIn){
         
         if(this.userId == this.channelId){
-          this.showButton = false;
+          this.editButton();
         }else{
           this.isLogged();
         }
@@ -45,6 +53,10 @@ export class SuscribeButtonComponent implements OnInit {
         this.userId = 0;
       }
     });
+  }
+
+  editButton(){
+    this.isEdditable = true;
   }
 
   isLogged(){

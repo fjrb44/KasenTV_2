@@ -4,6 +4,8 @@ import { OwnUserService } from 'src/app/shared/services/own-user.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/user/model/user';
 import { JarwisService } from 'src/app/shared/services/jarwis.service';
+import { TokenService } from 'src/app/shared/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -15,10 +17,8 @@ export class AccountComponent implements OnInit {
     logo: null,
     banner: null,
     username: null,
-    /*
     password: null,
     password_confirmation: null
-    */
   };
   private publicUrl: string;
   
@@ -33,12 +33,12 @@ export class AccountComponent implements OnInit {
     private notify: SnotifyService,
     private ownUserService: OwnUserService,
     private userService: UserService,
-    private jarwisService: JarwisService
+    private jarwisService: JarwisService,
+    private tokenService: TokenService,
+    private route: Router
   ) { }
 
   ngOnInit() {
-    this.notify.confirm('Buena');
-    
     this.userId = Number(this.ownUserService.getId());
     this.userService.getUser(this.userId).subscribe( (data: User) => {
       this.user = data;
@@ -72,11 +72,12 @@ export class AccountComponent implements OnInit {
 
       reader.readAsDataURL(file);
 
-      this.form.logo = <File>event.target.files[0];
+      this.form.banner = <File>event.target.files[0];
     }
   }
   onSubmit(){
     let fd = new FormData;
+    this.error = [];
 
     if(this.form.logo){
       fd.append('logo', this.form.logo);
@@ -89,17 +90,32 @@ export class AccountComponent implements OnInit {
     if(this.form.username != this.user.username){
       fd.append('username', this.form.username);
     }
-    /*
     if(this.form.password){
       fd.append('password', this.form.password);
     }
     if(this.form.password_confirmation){
       fd.append('password_confirmation', this.form.password_confirmation);
     }
-    */
     this.jarwisService.changeUserData(fd).subscribe(
-      data => console.log(data),
-      error => console.log(error)
+      data => this.handleResponse(data),
+      error => this.handleError(error)
     );
+  }
+
+  handleError(error){
+    if(error.error.errors){
+      this.error = error.error.errors;
+    }else if(error.message){
+      this.notify.error("You need to log in");
+      this.tokenService.logout();
+      this.route.navigateByUrl("/login");
+    }
+  }
+  handleResponse(data){
+    if(data.error){
+      this.notify.info(data.error, {timeout: 2000});
+    }else{
+      this.notify.success(data.data);
+    }
   }
 }

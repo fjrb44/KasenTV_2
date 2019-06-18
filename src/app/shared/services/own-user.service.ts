@@ -35,6 +35,10 @@ export class OwnUserService {
     let videoUrl = this.route.url;
     videoUrl = videoUrl.substring( videoUrl.indexOf('video/')+6, videoUrl.length);
 
+    if(videoUrl.indexOf("/") != -1){
+      videoUrl = videoUrl.substring(0, videoUrl.indexOf("/"));
+    }
+    
     videoId = Number(videoUrl);
 
     if(isNaN(videoId)){
