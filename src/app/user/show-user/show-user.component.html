@@ -2,8 +2,8 @@
   <div *ngIf="areSomeUsers()" class="row justify-content-center">
     <div *ngFor="let user of users">
       <div class="users" (click)="reload()" routerLink="{{url}}{{user.id}}">
-        <div>
-          <img class="img-thumbnail" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
+        <div class="maxImg">
+          <img class="img-thumbnail maxImg" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
         </div>
         <p>{{ user.username }}</p>
         <p class="seguidores" *ngIf="user.followers == 1; else moreFollowers">{{ user.followers }} seguidor</p>

@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-header">Sube tu video aquí</div>
                 <div class="card-body">
-                    <form #videoForm=ngForm (ngSubmit)="onSubmit()">
+                    <form #videoForm=ngForm (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 
                         <div class="form-group row">
                             <label for="url" class="col-12 col-form-label">Video</label>
