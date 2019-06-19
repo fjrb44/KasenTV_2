@@ -47,6 +47,12 @@ export class VideoEditComponent implements OnInit {
     this.categories = [];
     this.userId = Number(this.ownUserService.getId());
     this.videoId = this.ownUserService.getActualVideo();
+    this.loadVideo();
+    this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
+    this.publicUrl = "http://localhost:8000/storage/";
+  }
+
+  loadVideo(){
     this.videoService.getVideo(this.videoId).subscribe((data: Video) => {
       this.video = data;
       this.form.title = data.title;
@@ -55,8 +61,6 @@ export class VideoEditComponent implements OnInit {
         this.form.categoryId = data.categoryId;
       }
     });
-    this.categoryService.getCategories().subscribe( (data: Category[]) => this.categories = data);
-    this.publicUrl = "http://localhost:8000/storage/";
   }
 
   onImageSelected(event){
@@ -74,18 +78,18 @@ export class VideoEditComponent implements OnInit {
   }
 
   onSubmit(){
-    let fd = new FormData;
+    const fd = new FormData;
     this.error = [];
 
-    if(this.form.imageUrl){
+    if(this.form.imageUrl) {
       fd.append('imageUrl', this.form.imageUrl);
     }
 
-    if(this.form.title != this.video.title){
+    if(this.form.title != this.video.title) {
       fd.append('title', this.form.title);
     }
 
-    if(this.form.description != this.video.description){
+    if(this.form.description != this.video.description) {
       fd.append('description', this.form.description);
     }
 
@@ -95,19 +99,22 @@ export class VideoEditComponent implements OnInit {
     );
   }
 
-  handleError(error){
+  handleError(error) {
     if(error.error.errors){
       this.error = error.error.errors;
-    }else if(error.message){
+    } else if(error.message) {
       this.notify.error("You need to log in");
       this.tokenService.logout();
       this.route.navigateByUrl("/login");
     }
   }
-  handleResponse(data){
-    if(data.error){
+  handleResponse(data) {
+    if (data.error) {
       this.notify.info(data.error, {timeout: 2000});
-    }else{
+    } else {
+      this.video = null;
+      this.loadVideo();
+
       this.notify.success(data.data);
     }
   }

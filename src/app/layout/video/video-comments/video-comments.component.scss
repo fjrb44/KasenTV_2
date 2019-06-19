@@ -9,10 +9,18 @@
         border: none;
     }
 }
+.img-own-parent{
+  width: 75px;
+  height: 75px;
 
+  .imgLogo{
+    width: 75px;
+    height: 75px;
+  }
+}
 .channel{
     outline: none;
-    
+
     .username{
         text-align: center;
     }
@@ -20,14 +28,17 @@
     >div{
         overflow: hidden;
         border-radius: 100%;
-        max-width: 50px;
+        width: 50px;
+        height: 50px;
         margin: 0 auto;
+
         img{
             width: 100%;
             transition: all .2s;
             transform: scale(1);
             border-radius: 50%;
-            max-width: 50px;
+            width: 50px;
+            height: 50px;
         }
     }
 

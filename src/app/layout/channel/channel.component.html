@@ -1,11 +1,11 @@
 <ng-snotify></ng-snotify>
 
 <div *ngIf="user">
-  <img *ngIf="user" class="img-thumbnail col-12" src="{{ publicUrl }}{{ user.banner }}" alt="Banner Image">
+  <img *ngIf="user" class="col-12 banner" src="{{ publicUrl }}{{ user.banner }}" alt="Banner Image">
 
   <div class="row mt-3 mb-3 align-content-center">
     <div class="col-md-2 col-4">
-      <img class="img-thumbnail" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
+      <img class="logo" src="{{ publicUrl }}{{ user.logo }}" alt="Logo Image">
     </div>
     <div class="col-8 col-md-8 mt-1">
       <h1>{{ user.username }}</h1>
@@ -19,7 +19,6 @@
       <button class="btn btn-suscribe">Suscribe</button>
     </div>-->
   </div>
-  
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3 col-12">
     <div class="navbar-collapse">
       <ul class="navbar-nav mr-auto">
@@ -33,14 +32,14 @@
           <a class="nav-link" [routerLink]="['following']">Following</a>
         </li>
       </ul>
-  
+
       <form [formGroup]="form" (submit)="searchUserVideo()" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" formControlName="searchUserField">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit" [disabled]="!form.valid">Search</button>
       </form>
     </div>
   </nav>
-  
+
   <div class="col-12">
     <router-outlet></router-outlet>
   </div>

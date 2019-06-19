@@ -1,6 +1,6 @@
 <div class="row mt-5" *ngIf="isLogged">
-  <div class="col-3 col-lg-2">
-    <img class="img-thumbnail" src="{{ publicUrl }}{{ imageUrl }}" alt="Logo Image">
+  <div class="col-3 col-lg-2 img-own-parent">
+    <img class="imgLogo" src="{{ publicUrl }}{{ imageUrl }}" alt="Logo Image">
   </div>
   <div class="col-9 col-lg-10 mb-3">
     <form [formGroup]="form" (submit)="onCommentUserVideo()">
@@ -27,7 +27,9 @@
 <div *ngIf="videoId">
   <div class="row mt-2 comment" *ngFor="let comment of comments">
     <div class="col-3 col-lg-2 offset-lg-1 channel" routerLink="/channel/{{ comment.userId }}">
-      <div><img class="img-thumbnail" src="{{ publicUrl }}{{comment.logo}}" alt="Logo Image"></div>
+      <div class="img-parent">
+        <img class="imgLogo" src="{{ publicUrl }}{{comment.logo}}" alt="Logo Image">
+      </div>
       <p class="username">{{comment.username}}</p>
     </div>
     <div class="col-9 col-lg-9">

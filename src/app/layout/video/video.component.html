@@ -1,18 +1,13 @@
 <ng-snotify></ng-snotify>
 
 <div class="row">
-  <div class="col-12">
+  <div class="col-12 col-md-9">
     <app-video-player [video]="video"></app-video-player>
+    <app-video-comments *ngIf="video" [videoId]="video.id"></app-video-comments>
   </div>
-  <div class="col-12 col-lg-10 offset-lg-1">
-    <div class="row">
-      <div class="col-12 col-md-9">
-        <app-video-comments *ngIf="video" [videoId]="video.id"></app-video-comments>
-      </div>
-      <div class="col-12 col-md-3">
-        Videos recomendados
-        <app-videos [videos]="videos" [oneColumn]="true"></app-videos>
-      </div>
-    </div>
+
+  <div class="col-12 col-md-3">
+    Videos recomendados
+    <app-videos [videos]="videos" [oneColumn]="true"></app-videos>
   </div>
 </div>
