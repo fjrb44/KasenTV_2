@@ -8,6 +8,7 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LogHeaderModule } from 'src/app/shared/component/log-header/log-header.module';
+import { SnotifyService, ToastDefaults, SnotifyModule } from 'ng-snotify';
 
 @NgModule({
     imports: [
@@ -18,10 +19,12 @@ import { LogHeaderModule } from 'src/app/shared/component/log-header/log-header.
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
-        LogHeaderModule
+        LogHeaderModule,
+        SnotifyModule
     ],
     declarations: [
         LoginComponent 
-    ]
+    ],
+    providers: [ {provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService]
 })
 export class LoginModule {}

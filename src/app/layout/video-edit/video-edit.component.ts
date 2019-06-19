@@ -27,6 +27,7 @@ export class VideoEditComponent implements OnInit {
   private publicUrl: string;
   private error: [];
   private categories: Category[];
+  private unableSend: boolean;
 
   public imageSrc;
   public userId: number;
@@ -43,6 +44,7 @@ export class VideoEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.unableSend = false;
     this.error = [];
     this.categories = [];
     this.userId = Number(this.ownUserService.getId());
@@ -80,27 +82,38 @@ export class VideoEditComponent implements OnInit {
   onSubmit(){
     const fd = new FormData;
     this.error = [];
+    let aux = false;
 
     if(this.form.imageUrl) {
       fd.append('imageUrl', this.form.imageUrl);
+      aux = true;
     }
 
     if(this.form.title != this.video.title) {
       fd.append('title', this.form.title);
+      aux = true;
     }
 
     if(this.form.description != this.video.description) {
-      fd.append('description', this.form.description);
+      fd.append('description', this.form.description);aux = true;
+      aux = true;
     }
-
-    this.videoService.videoUpdate(fd, this.videoId).subscribe(
-      data => this.handleResponse(data),
-      error => this.handleError(error)
-    );
+    
+    if(aux){
+      this.unableSend = true;
+      
+      this.videoService.videoUpdate(fd, this.videoId).subscribe(
+        data => this.handleResponse(data),
+        error => this.handleError(error)
+      );
+    }else{
+      this.notify.info("You need to modify something");
+    }
   }
 
   handleError(error) {
     if(error.error.errors){
+      this.unableSend = false;
       this.error = error.error.errors;
     } else if(error.message) {
       this.notify.error("You need to log in");
@@ -112,6 +125,8 @@ export class VideoEditComponent implements OnInit {
     if (data.error) {
       this.notify.info(data.error, {timeout: 2000});
     } else {
+      this.unableSend = false;
+      
       this.video = null;
       this.loadVideo();
 

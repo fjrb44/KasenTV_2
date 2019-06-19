@@ -4,7 +4,14 @@
   <div class="row">
     <div class="mt-4 col-8 offset-2">
       <div class="card">
-        <div class="card-header">Tus datos</div>
+        <div class="card-header">
+          <div class="float-left">
+            <p>Modifica el video</p>
+          </div>
+          <div class="float-right">
+            <button class="btn btn-success" routerLink="../">Volver</button>
+          </div>
+        </div>
         <div class="card-body" *ngIf="video">
 
           <form #videoForm=ngForm (ngSubmit)="onSubmit()">
@@ -67,7 +74,7 @@
             <div class="form-group row">
               <div class="col-12">
                 <button type="submit" class="btn btn-primary mt-3 ml-3 mt-sm-0 ml-sm-0"
-                  [disabled]="!videoForm.valid">Enviar</button>
+                  [disabled]="!videoForm.valid || unableSend">Enviar</button>
               </div>
             </div>
           </form>

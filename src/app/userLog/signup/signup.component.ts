@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { JarwisService } from 'src/app/shared/services/jarwis.service';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-signup',
@@ -20,21 +21,25 @@ export class SignupComponent implements OnInit {
   };
   public imageSrc;
   public error = [];
+  public unableSubmit: boolean;
+  public wait;
 
   constructor(
     private router: Router,
     private jarwisService: JarwisService,
     private tokenService: TokenService,
-    private authService: AuthService
+    private authService: AuthService,
+    public notify: SnotifyService
   ) { }
 
   ngOnInit() {
-    
+    this.unableSubmit = false;
   }
 
   onSubmit(){
     this.error = [];
-
+    this.unableSubmit = true;
+    this.wait = this.notify.info("Wait...");
     let fd = new FormData;
 
     fd.append('email', this.form.email);
@@ -63,7 +68,7 @@ export class SignupComponent implements OnInit {
   }
 
   handleResponse(data){
-    console.log(data);
+    this.notify.remove(this.wait.id);
 
     this.tokenService.handle(data.access_token);
     this.tokenService.setUsername(data.user);
@@ -75,6 +80,8 @@ export class SignupComponent implements OnInit {
   }
 
   handleError(error){
+    this.notify.remove(this.wait.id);
+    this.unableSubmit = false;
     this.error = error.error.errors;
   }
 

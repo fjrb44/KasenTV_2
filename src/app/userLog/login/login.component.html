@@ -1,5 +1,7 @@
 <app-log-header></app-log-header>
 
+<ng-snotify></ng-snotify>
+
 <div class="main-container">
   <div class="row">
     <div class="mt-4 col-8 offset-2">
@@ -7,40 +9,30 @@
         <div class="card-header">Login Here</div>
         <div class="card-body">
           <form #loginForm=ngForm (ngSubmit)="onSubmit()">
-    
-            <div class="alert alert-danger" [hidden]="!error">
+            <div class="alert alert-danger" *ngIf="error">
               {{error}}
             </div>
             <div class="form-group row">
-              <label for="inputEmail3" class="col-md-2 col-form-label">Email</label>
-              <div class="col-md-10">
+              <label for="inputEmail3" class="col-lg-2 col-form-label">Email</label>
+              <div class="col-lg-10">
                 <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" [(ngModel)]="form.email" required>
               </div>
             </div>
     
             <div class="form-group row">
-              <label for="inputPassword3" class="col-md-2 col-form-label">Password</label>
-              <div class="col-md-10">
+              <label for="inputPassword3" class="col-lg-2 col-form-label">Password</label>
+              <div class="col-lg-10">
                 <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" [(ngModel)]="form.password"
                   required>
               </div>
             </div>
     
             <div class="form-group row">
-              <div class="col-12 col-md-10 offset-md-2">
-    
-                <button type="submit" class="btn btn-primary mt-3 ml-3 mt-sm-0 ml-sm-0" [disabled]="!loginForm.valid">Sign in</button>
-    
+              <div class="col-12 col-lg-10 offset-lg-2">
+                <button type="submit" class="btn btn-primary mt-3 ml-3 mt-sm-0 ml-sm-0" [disabled]="!loginForm.valid || unableSubmit">Sign in</button>
                 <a routerLink="/signup" class="btn btn-info float-md-right mt-3 ml-3 ml-sm-0 mt-sm-0">Sign Up</a>
-    
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-md-10 offset-2">
-    
-              </div>
-            </div>
-
             <small class=float-right>
               <a routerLink="/password-reset">Reset Password</a>
             </small>
