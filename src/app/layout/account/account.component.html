@@ -21,10 +21,10 @@
               </div>
             </div>
             <div class="imageDiv" *ngIf="!logoSrc">
-              <img class="img" src="{{ publicUrl }}{{ user.logo }}" alt="User Logo">
+              <img class="img logo" src="{{ publicUrl }}{{ user.logo }}" alt="User Logo">
             </div>
             <div class="imageDiv" *ngIf="logoSrc">
-              <img class="img" src="{{ logoSrc }}" alt="Your image" />
+              <img class="img logo" src="{{ logoSrc }}" alt="Your image" />
             </div>
 
             <div class="form-group row">
@@ -40,10 +40,10 @@
             </div>
 
             <div class="imageDiv" *ngIf="!bannerSrc">
-              <img class="img" src="{{ publicUrl }}{{ user.banner }}" alt="User Banner">
+              <img class="img banner" src="{{ publicUrl }}{{ user.banner }}" alt="User Banner">
             </div>
             <div class="imageDiv" *ngIf="bannerSrc">
-              <img class="img" src="{{ bannerSrc }}" alt="Your image" />
+              <img class="img banner" src="{{ bannerSrc }}" alt="Your image" />
             </div>
 
             <div class="form-group row">

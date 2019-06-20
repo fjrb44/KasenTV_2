@@ -95,7 +95,12 @@ export class VideoEditComponent implements OnInit {
     }
 
     if(this.form.description != this.video.description) {
-      fd.append('description', this.form.description);aux = true;
+      fd.append('description', this.form.description);
+      aux = true;
+    }
+
+    if(this.form.categoryId != this.video.categoryId && this.form.categoryId){
+      fd.append('categoryId', this.form.categoryId+'');
       aux = true;
     }
     

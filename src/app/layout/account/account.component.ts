@@ -40,14 +40,17 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.userId = Number(this.ownUserService.getId());
-    this.userService.getUser(this.userId).subscribe( (data: User) => {
-      this.user = data;
-      this.form.username = this.user.username;
-    });
+    this.loadUser();
 
     this.publicUrl = "http://localhost:8000/storage/";
   }
 
+  loadUser(){
+    this.userService.getUser(this.userId).subscribe( (data: User) => {
+      this.user = data;
+      this.form.username = this.user.username;
+    });
+  }
   onLogoSelected(event){
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -115,6 +118,8 @@ export class AccountComponent implements OnInit {
     if(data.error){
       this.notify.info(data.error, {timeout: 2000});
     }else{
+      this.user = null;
+      this.loadUser();
       this.notify.success(data.data);
     }
   }
